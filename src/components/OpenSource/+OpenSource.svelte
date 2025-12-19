@@ -52,11 +52,15 @@
   <div class="flex gap-8 justify-center align-center pb-8 flex-wrap">
     {#each repositories as { name, icon, stars, forks, url }}
       <div class="text-white w-64 bg-gray-800 p-4 rounded-lg grid gap-2">
-        <header class="text-xl font-semibold">
-          <img src={icon} alt={name} width="48px" />
-          {name}
+        <header class="font-semibold flex justify-between">
+          <div class="text-xl">
+            <img src={icon} alt={name} width="48px" />
+            {name}
+          </div>
+          <span>
+            ⭐ {formatStarNumber(stars)}
+          </span>
         </header>
-        <p>⭐ {formatStarNumber(stars)}</p>
         <p>Forks: {forks}</p>
         <a
           class="text-blue-500 hover:text-blue-700"
