@@ -4,8 +4,8 @@
 
 <div class="bg-app-color text-white flex flex-col gap-8 p-8">
   <h2 class="text-3xl font-semibold">My Projects</h2>
-  <div class="flex gap-8">
-    <img src={theInvoicePreview} alt="The Invoice Preview" class="w-1/2" />
+  <div class="grid md:flex gap-8">
+    <img src={theInvoicePreview} alt="The Invoice Preview" class="md:w-1/2" />
     <article class="flex flex-col gap-4">
       <h3 class="text-xl font-semibold">The Invoice</h3>
       <p class="text-lg">
