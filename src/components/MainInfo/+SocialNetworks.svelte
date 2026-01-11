@@ -17,7 +17,7 @@
     {
       icon: instagramIcon,
       alt: "instagram-icon",
-      link: "https://instagram.com/quaresmadraw",
+      link: "https://instagram.com/drawquaresma",
     },
   ];
 </script>
