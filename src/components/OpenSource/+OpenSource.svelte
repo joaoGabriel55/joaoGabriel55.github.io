@@ -16,13 +16,10 @@
       ),
     ]);
 
-    console.log(response);
-
     return response.map((repo: any) => ({
       icon: repo.owner.avatar_url,
       name: repo.name,
       stars: repo.stargazers_count,
-      forks: repo.forks_count,
       url: repo.html_url,
     }));
   }
@@ -49,21 +46,20 @@
 
 <div class="bg-app-color text-white flex flex-col items-center gap-8 p-8">
   <h2 class="text-3xl font-semibold">Contributed Open-Source Projects</h2>
-  <div class="flex gap-8 justify-center align-center pb-8 flex-wrap">
+  <div class="grid gap-8 justify-center align-center pb-8 flex-wrap">
     {#each repositories as { name, icon, stars, forks, url }}
-      <div class="text-white w-64 bg-gray-800 p-4 rounded-lg grid gap-2">
+      <div class="text-white w-80 bg-gray-800 p-4 rounded-lg grid gap-2">
         <header class="font-semibold flex justify-between">
-          <div class="text-xl">
+          <div class="text-xl flex items-center gap-4">
             <img src={icon} alt={name} width="48px" />
-            {name}
+            <h3>{name}</h3>
           </div>
           <span>
             ⭐ {formatStarNumber(stars)}
           </span>
         </header>
-        <p>Forks: {forks}</p>
         <a
-          class="text-blue-500 hover:text-blue-700"
+          class="text-blue-500 text-right hover:text-blue-700"
           href={formatMyPRsUrl(url)}
           target="_blank"
         >

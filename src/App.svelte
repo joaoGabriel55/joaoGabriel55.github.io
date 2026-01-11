@@ -1,15 +1,15 @@
 <script lang="ts">
   import Footer from "./components/Footer/+Footer.svelte";
-  import GitStatsSection from "./components/GitStatsSection/+GitStatsSection.svelte";
   import MainInfo from "./components/MainInfo/+MainInfo.svelte";
   import OpenSource from "./components/OpenSource/+OpenSource.svelte";
+  import Projects from "./components/Projects/+Projects.svelte";
 
   export const prerender = true;
 </script>
 
 <main class="grid">
   <MainInfo />
-  <GitStatsSection />
+  <Projects />
   <OpenSource />
 </main>
 <Footer />
