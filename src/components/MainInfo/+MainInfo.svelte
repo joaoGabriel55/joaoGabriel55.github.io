@@ -14,7 +14,11 @@
   <section class="flex flex-col gap-4">
     <div class="flex flex-col gap-2">
       <div class="flex flex-col md:flex-row md:items-center gap-8">
-        <img src={profilePicture} alt="profile" class="w-40 self-center" />
+        <img
+          src={profilePicture}
+          alt="profile"
+          class="w-40 rounded-full self-center"
+        />
         <MyName />
       </div>
       <Overview />
