@@ -1,21 +1,13 @@
 <script lang="ts">
   import Footer from "./components/Footer/+Footer.svelte";
   import Header from "./components/Header/+Header.svelte";
-  import MainInfo from "./components/MainInfo/+MainInfo.svelte";
-  import OpenSource from "./components/OpenSource/+OpenSource.svelte";
-  import Projects from "./components/Projects/+Projects.svelte";
-  import Blog from "./components/Blog/+Blog.svelte";
-
-  export const prerender = true;
+  import BlogList from "./components/Blog/+BlogList.svelte";
 </script>
 
 <Header />
 
 <main class="min-h-screen bg-surface">
-  <MainInfo />
-  <Projects />
-  <Blog />
-  <OpenSource />
+  <BlogList />
 </main>
 
 <Footer />

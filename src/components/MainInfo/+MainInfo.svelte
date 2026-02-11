@@ -5,7 +5,9 @@
   import SocialNetworks from "./+SocialNetworks.svelte";
 </script>
 
-<section class="min-h-screen flex items-center justify-center py-20 md:py-32">
+<section
+  class="min-h-screen flex items-center justify-center py-20 md:py-32 pt-24 md:pt-32"
+>
   <div class="section-container">
     <div class="flex flex-col items-center text-center gap-12 md:gap-16">
       <!-- Profile Photo with Grayscale Filter -->
