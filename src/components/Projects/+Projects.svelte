@@ -1,7 +1,24 @@
 <script lang="ts">
   import theInvoicePreview from "../../lib/assets/projects/the_invoice.jpeg";
+  import pokerEstimaPreview from "../../lib/assets/projects/poker_estima.jpeg";
 
   const projects = [
+    {
+      title: "Poker Estima",
+      description:
+        "An app that you can estimate with points your tasks with your teammates",
+      stack: [
+        "HTML",
+        "CSS",
+        "JavaScript",
+        "Node.js",
+        "WebSockets",
+        "Express",
+        "SQLite",
+      ],
+      image: pokerEstimaPreview,
+      link: "https://poker-estima-app.fly.dev/",
+    },
     {
       title: "The Invoice",
       description:
