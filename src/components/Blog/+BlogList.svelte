@@ -55,7 +55,7 @@
     <div class="section-container">
       <!-- Back to Home -->
       <a
-        href="./"
+        href="./index.html"
         class="inline-flex items-center gap-3 text-sm text-neutral-400 hover:text-white transition-colors duration-300 mb-12 group"
       >
         <svg

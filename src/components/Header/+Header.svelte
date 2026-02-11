@@ -23,7 +23,7 @@
     }
     if (isBlogPage) {
       // Navigate to home page
-      window.location.href = "./";
+      window.location.href = "./index.html";
     } else {
       window.scrollTo({ top: 0, behavior: "smooth" });
     }
