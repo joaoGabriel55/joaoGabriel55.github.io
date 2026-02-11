@@ -1,19 +1,28 @@
 /** @type {import('tailwindcss').Config} */
 export default {
-  content: ['./src/**/*.{html,js,svelte,ts}'],
+  content: ["./src/**/*.{html,js,svelte,ts}"],
   theme: {
     extend: {
-      gridAutoRows: {
-        'app-layout': '1.5fr 1fr auto',
+      fontFamily: {
+        sans: ["Inter", "system-ui", "sans-serif"],
       },
       colors: {
-        'app-color': '#151515'
+        surface: {
+          DEFAULT: "#0a0a0a",
+          light: "#141414",
+          lighter: "#1a1a1a",
+        },
+        accent: {
+          DEFAULT: "#e5e5e5",
+          muted: "#a3a3a3",
+          subtle: "#525252",
+        },
       },
-      backgroundImage: {
-        'app-wallpaper': "url('/src/lib/assets/bg.jpg')",
-      }
+      spacing: {
+        18: "4.5rem",
+        22: "5.5rem",
+      },
     },
   },
   plugins: [],
-}
-
+};

@@ -7,7 +7,7 @@
   export const prerender = true;
 </script>
 
-<main class="grid">
+<main class="min-h-screen bg-surface">
   <MainInfo />
   <Projects />
   <OpenSource />
@@ -16,6 +16,10 @@
 
 <style lang="postcss">
   :global(html) {
-    background-color: theme("colors.black");
+    background-color: #0a0a0a;
+  }
+
+  :global(body) {
+    overflow-x: hidden;
   }
 </style>

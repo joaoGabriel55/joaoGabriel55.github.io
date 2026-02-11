@@ -1,3 +1,5 @@
-<h1 class="text-3xl lg:text-5xl font-bold text-white leading-normal">
-  Hi! I am <br />Gabriel Quaresma
+<h1
+  class="text-4xl md:text-5xl lg:text-6xl font-extralight tracking-tight text-white"
+>
+  Gabriel Quaresma
 </h1>

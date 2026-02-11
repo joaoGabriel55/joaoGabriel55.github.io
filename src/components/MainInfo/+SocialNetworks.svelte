@@ -6,35 +6,43 @@
   const socialNetworks = [
     {
       icon: githubIcon,
-      alt: "github-icon",
+      alt: "GitHub",
       link: "https://github.com/joaoGabriel55",
+      label: "GitHub",
     },
     {
       icon: linkedinIcon,
-      alt: "linkedin-icon",
+      alt: "LinkedIn",
       link: "https://linkedin.com/in/gabriel-quaresma-dev",
+      label: "LinkedIn",
     },
     {
       icon: instagramIcon,
-      alt: "instagram-icon",
+      alt: "Instagram",
       link: "https://instagram.com/drawquaresma",
+      label: "Instagram",
     },
   ];
 </script>
 
-<section>
-  <h3 class="text-lg font-semibold text-white leading-normal mb-4">
-    My Social Networks
-  </h3>
-  <div class="flex justify-center md:justify-start gap-12">
-    {#each socialNetworks as { icon, alt, link }}
-      <a
-        href={link}
-        target="_blank"
-        class="transition ease-in-out delay-100 hover:-translate-y-1 hover:scale-110 duration-150"
-      >
-        <img src={icon} {alt} class="bg-white p-4 rounded-3xl w-14 md:w-20" />
-      </a>
+<nav aria-label="Social networks">
+  <ul class="flex items-center justify-center gap-8">
+    {#each socialNetworks as { icon, alt, link, label }}
+      <li>
+        <a
+          href={link}
+          target="_blank"
+          rel="noopener noreferrer"
+          aria-label={label}
+          class="group flex items-center justify-center w-12 h-12 rounded-full border border-neutral-800 hover:border-neutral-600 hover:bg-neutral-900 transition-all duration-300"
+        >
+          <img
+            src={icon}
+            {alt}
+            class="w-5 h-5 opacity-60 group-hover:opacity-100 transition-opacity duration-300"
+          />
+        </a>
+      </li>
     {/each}
-  </div>
-</section>
+  </ul>
+</nav>
