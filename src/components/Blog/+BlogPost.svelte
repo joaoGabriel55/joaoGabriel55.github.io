@@ -2,6 +2,7 @@
   import type { BlogPost } from "../../lib/blog";
   import { formatDate, getReadingTime } from "../../lib/blog";
   import { closePost } from "../../lib/stores/blogStore";
+  import { push } from "svelte-spa-router";
 
   export let post: BlogPost;
 
@@ -9,6 +10,7 @@
 
   function handleBack() {
     closePost();
+    push("/blog");
   }
 </script>
 

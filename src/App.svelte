@@ -1,10 +1,15 @@
 <script lang="ts">
+  import Router from "svelte-spa-router";
   import Footer from "./components/Footer/+Footer.svelte";
   import Header from "./components/Header/+Header.svelte";
-  import MainInfo from "./components/MainInfo/+MainInfo.svelte";
-  import OpenSource from "./components/OpenSource/+OpenSource.svelte";
-  import Projects from "./components/Projects/+Projects.svelte";
-  import Blog from "./components/Blog/+Blog.svelte";
+  import Home from "./routes/Home.svelte";
+  import BlogPage from "./routes/BlogPage.svelte";
+
+  const routes = {
+    "/": Home,
+    "/blog": BlogPage,
+    "/blog/:slug": BlogPage,
+  };
 
   export const prerender = true;
 </script>
@@ -12,10 +17,7 @@
 <Header />
 
 <main class="min-h-screen bg-surface">
-  <MainInfo />
-  <Projects />
-  <Blog />
-  <OpenSource />
+  <Router {routes} />
 </main>
 
 <Footer />

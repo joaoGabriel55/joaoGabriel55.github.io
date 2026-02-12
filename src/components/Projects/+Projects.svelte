@@ -6,7 +6,7 @@
     {
       title: "Poker Estima",
       description:
-        "An app that you can estimate with points your tasks with your teammates",
+        "An app that you can estimate with points (emojis) your tasks with your teammates",
       stack: [
         "HTML",
         "CSS",

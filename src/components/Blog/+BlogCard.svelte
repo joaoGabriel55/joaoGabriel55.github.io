@@ -1,13 +1,14 @@
 <script lang="ts">
   import type { BlogPost } from "../../lib/blog";
   import { formatDate, getReadingTime } from "../../lib/blog";
+  import { push } from "svelte-spa-router";
 
   export let post: BlogPost;
 
   $: readingTime = getReadingTime(post.content);
 
   function goToPost() {
-    window.location.href = `./blog.html#blog/${post.slug}`;
+    push(`/blog/${post.slug}`);
   }
 </script>
 

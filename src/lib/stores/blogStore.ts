@@ -11,10 +11,7 @@ export const viewingPost = writable<boolean>(false);
 export function openPost(post: BlogPost): void {
   currentPost.set(post);
   viewingPost.set(true);
-  
-  // Update URL hash for bookmarking/sharing
-  window.location.hash = `blog/${post.slug}`;
-  
+
   // Scroll to top when opening a post
   window.scrollTo({ top: 0, behavior: 'smooth' });
 }
@@ -23,17 +20,4 @@ export function openPost(post: BlogPost): void {
 export function closePost(): void {
   currentPost.set(null);
   viewingPost.set(false);
-  
-  // Clear the hash
-  window.location.hash = '';
-}
-
-// Initialize from URL hash on page load
-export function initFromHash(): void {
-  const hash = window.location.hash;
-  if (hash.startsWith('#blog/')) {
-    const slug = hash.replace('#blog/', '');
-    // The component will handle loading the post by slug
-    viewingPost.set(true);
-  }
 }

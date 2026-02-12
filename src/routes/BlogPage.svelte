@@ -1,51 +1,30 @@
 <script lang="ts">
   import { onMount } from "svelte";
-  import { getAllPosts, getPostBySlug, type BlogPost } from "../../lib/blog";
-  import {
-    currentPost,
-    viewingPost,
-    closePost,
-  } from "../../lib/stores/blogStore";
-  import BlogCard from "./+BlogCard.svelte";
-  import BlogPostView from "./+BlogPost.svelte";
+  import { getAllPosts, getPostBySlug, type BlogPost } from "../lib/blog";
+  import { currentPost, viewingPost } from "../lib/stores/blogStore";
+  import BlogCard from "../components/Blog/+BlogCard.svelte";
+  import BlogPostView from "../components/Blog/+BlogPost.svelte";
+  import { link } from "svelte-spa-router";
+
+  export let params: { slug?: string } = {};
 
   let posts: BlogPost[] = [];
 
   onMount(() => {
     posts = getAllPosts();
-
-    // Check for hash on mount (e.g., #blog/post-slug)
-    const hash = window.location.hash;
-    if (hash.startsWith("#blog/")) {
-      const slug = hash.replace("#blog/", "");
-      const post = getPostBySlug(slug);
-      if (post) {
-        currentPost.set(post);
-        viewingPost.set(true);
-      }
-    }
-
-    // Listen for hash changes
-    const handleHashChange = () => {
-      const hash = window.location.hash;
-      if (hash.startsWith("#blog/")) {
-        const slug = hash.replace("#blog/", "");
-        const post = getPostBySlug(slug);
-        if (post) {
-          currentPost.set(post);
-          viewingPost.set(true);
-        }
-      } else if (hash === "" || hash === "#") {
-        closePost();
-      }
-    };
-
-    window.addEventListener("hashchange", handleHashChange);
-
-    return () => {
-      window.removeEventListener("hashchange", handleHashChange);
-    };
   });
+
+  $: if (params.slug) {
+    const post = getPostBySlug(params.slug);
+    if (post) {
+      currentPost.set(post);
+      viewingPost.set(true);
+      window.scrollTo({ top: 0, behavior: "smooth" });
+    }
+  } else {
+    currentPost.set(null);
+    viewingPost.set(false);
+  }
 </script>
 
 {#if $viewingPost && $currentPost}
@@ -55,7 +34,8 @@
     <div class="section-container">
       <!-- Back to Home -->
       <a
-        href="./index.html"
+        href="/"
+        use:link
         class="inline-flex items-center gap-3 text-sm text-neutral-400 hover:text-white transition-colors duration-300 mb-12 group"
       >
         <svg

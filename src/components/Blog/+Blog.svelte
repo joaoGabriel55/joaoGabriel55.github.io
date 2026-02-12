@@ -1,6 +1,7 @@
 <script lang="ts">
   import { onMount } from "svelte";
   import { getAllPosts, type BlogPost } from "../../lib/blog";
+  import { link } from "svelte-spa-router";
   import BlogCard from "./+BlogCard.svelte";
 
   let recentPosts: BlogPost[] = [];
@@ -38,7 +39,8 @@
       <!-- View All Posts Link -->
       <div class="mt-12 text-center">
         <a
-          href="./blog.html"
+          href="/blog"
+          use:link
           class="inline-flex items-center gap-3 text-sm text-neutral-400 hover:text-white transition-colors duration-300 group"
         >
           View all posts
