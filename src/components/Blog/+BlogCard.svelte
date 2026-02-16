@@ -17,14 +17,21 @@
     class="p-6 md:p-8 bg-surface-light rounded-lg border border-neutral-800 hover:border-neutral-700 transition-all duration-300 hover:bg-surface-lighter"
   >
     <!-- Date and Reading Time -->
-    <div class="flex items-center gap-4 mb-4">
-      <time class="text-xs text-neutral-500 tracking-wide uppercase">
-        {formatDate(post.date)}
-      </time>
-      <span class="text-neutral-700">·</span>
-      <span class="text-xs text-neutral-500 tracking-wide">
-        {readingTime} min read
-      </span>
+    <div class="mb-6 space-y-2">
+      <div class="flex items-center gap-4">
+        <time class="text-xs text-neutral-500 tracking-wide uppercase">
+          {formatDate(post.date)}
+        </time>
+        <span class="text-neutral-700">·</span>
+        <span class="text-xs text-neutral-500 tracking-wide">
+          {readingTime} min read
+        </span>
+      </div>
+      {#if post.updateDate}
+        <p class="text-xs italic text-neutral-500 tracking-wide">
+          Updated at {formatDate(post.updateDate)}
+        </p>
+      {/if}
     </div>
 
     <!-- Title -->

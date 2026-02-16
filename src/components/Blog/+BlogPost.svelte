@@ -40,14 +40,21 @@
     <!-- Article Header -->
     <header class="mb-12 md:mb-16">
       <!-- Meta Info -->
-      <div class="flex items-center gap-4 mb-6">
-        <time class="text-sm text-neutral-500 tracking-wide">
-          {formatDate(post.date)}
-        </time>
-        <span class="text-neutral-700">·</span>
-        <span class="text-sm text-neutral-500 tracking-wide">
-          {readingTime} min read
-        </span>
+      <div class="mb-6 space-y-2">
+        <div class="flex items-center gap-4">
+          <time class="text-sm text-neutral-500 tracking-wide">
+            {formatDate(post.date)}
+          </time>
+          <span class="text-neutral-700">·</span>
+          <span class="text-sm text-neutral-500 tracking-wide">
+            {readingTime} min read
+          </span>
+        </div>
+        {#if post.updateDate}
+          <p class="text-xs italic text-neutral-500 tracking-wide">
+            Updated at {formatDate(post.updateDate)}
+          </p>
+        {/if}
       </div>
 
       <!-- Title -->
@@ -249,7 +256,7 @@
     font-size: 0.875rem;
     font-family:
       ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, monospace;
-    color: #e5e5e5;
+    /*color: #e5e5e5;*/
   }
 
   .prose :global(pre) {
