@@ -11,6 +11,7 @@
       stack: ["HTML", "CSS", "JavaScript"],
       image: liveZenTube,
       link: "https://livezentube.netlify.app/",
+      repository: "https://github.com/joaoGabriel55/live-hub",
     },
     {
       title: "Poker Estima",
@@ -27,6 +28,7 @@
       ],
       image: pokerEstimaPreview,
       link: "https://poker-estima-app.fly.dev/",
+      repository: "https://github.com/joaoGabriel55/NostraEstima",
     },
     {
       title: "The Invoice",
@@ -35,6 +37,7 @@
       stack: ["HTML", "CSS", "JavaScript"],
       image: theInvoicePreview,
       link: "https://the-invoice.netlify.app/",
+      repository: "https://github.com/joaoGabriel55/invoice-generator",
     },
   ];
 </script>
@@ -53,7 +56,7 @@
 
     <!-- Projects Grid -->
     <div class="space-y-20">
-      {#each projects as { title, description, stack, image, link }, index}
+      {#each projects as { title, description, stack, image, link, repository }, index}
         <article class="group">
           <div class="grid md:grid-cols-2 gap-8 md:gap-12 items-center">
             <!-- Image -->
@@ -105,6 +108,30 @@
                 {/each}
               </div>
 
+              <a
+                href={repository}
+                target="_blank"
+                rel="noopener noreferrer"
+                class="inline-flex items-center gap-3 text-sm text-neutral-400 hover:text-white transition-colors duration-300 group/link"
+              >
+                <span
+                  class="w-8 h-px bg-neutral-700 group-hover/link:w-12 group-hover/link:bg-white transition-all duration-300"
+                ></span>
+                View Source Code
+                <svg
+                  class="w-4 h-4 transform group-hover/link:translate-x-1 transition-transform duration-300"
+                  fill="none"
+                  stroke="currentColor"
+                  viewBox="0 0 24 24"
+                >
+                  <!-- <path
+                    stroke-linecap="round"
+                    stroke-linejoin="round"
+                    stroke-width="1.5"
+                    d="M17 8l4 4m0 0l-4 4m4-4H3"
+                  /> -->
+                </svg>
+              </a>
               <!-- Link -->
               <a
                 href={link}
