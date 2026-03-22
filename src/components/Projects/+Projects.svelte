@@ -1,8 +1,17 @@
 <script lang="ts">
   import theInvoicePreview from "../../lib/assets/projects/the_invoice.jpeg";
   import pokerEstimaPreview from "../../lib/assets/projects/poker_estima.jpeg";
+  import liveZenTube from "../../lib/assets/projects/livezentube.jpeg";
 
   const projects = [
+    {
+      title: "LiveZenTube",
+      description:
+        "A lightweight, client-side web app for monitoring and watch YouTube live streams across multiple channels. Everything runs in the browser using the YouTube Data API v3.",
+      stack: ["HTML", "CSS", "JavaScript"],
+      image: liveZenTube,
+      link: "https://livezentube.netlify.app/",
+    },
     {
       title: "Poker Estima",
       description:
