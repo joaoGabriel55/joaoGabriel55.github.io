@@ -11,17 +11,17 @@
 
   let loading = true;
 
+  async function fetchRepository(url: string) {
+    const response = await fetch(`https://api.github.com/repos/${url}`);
+    return response.json();
+  }
+
   async function fetchRepositories() {
     const response = await Promise.all([
-      fetch("https://api.github.com/repos/axios/axios").then((res) =>
-        res.json(),
-      ),
-      fetch("https://api.github.com/repos/grommet/grommet").then((res) =>
-        res.json(),
-      ),
-      fetch("https://api.github.com/repos/forem/forem").then((res) =>
-        res.json(),
-      ),
+      fetchRepository("rails/rails"),
+      fetchRepository("axios/axios"),
+      fetchRepository("grommet/grommet"),
+      fetchRepository("forem/forem"),
     ]);
 
     return response.map((repo: any) => ({
@@ -54,12 +54,12 @@
   });
 </script>
 
-<section class="py-24 md:py-32 border-t border-neutral-900">
+<section class="py-24 md:py-32 border-t border-neutral-200 dark:border-neutral-900">
   <div class="section-container">
     <!-- Section Header -->
     <header class="mb-16 md:mb-20">
       <span
-        class="text-xs uppercase tracking-widest text-neutral-600 mb-4 block"
+        class="text-xs uppercase tracking-widest text-neutral-500 dark:text-neutral-600 mb-4 block"
       >
         Community
       </span>
@@ -75,14 +75,14 @@
       <div class="grid md:grid-cols-3 gap-6">
         {#each [1, 2, 3] as _}
           <div
-            class="p-6 rounded-lg border border-neutral-800 bg-surface-light animate-pulse"
+            class="p-6 rounded-lg border border-neutral-200 dark:border-neutral-800 bg-neutral-50 dark:bg-surface-light animate-pulse"
           >
             <div class="flex items-center gap-4 mb-4">
-              <div class="w-10 h-10 rounded-full bg-neutral-800"></div>
-              <div class="h-5 w-24 bg-neutral-800 rounded"></div>
+              <div class="w-10 h-10 rounded-full bg-neutral-200 dark:bg-neutral-800"></div>
+              <div class="h-5 w-24 bg-neutral-200 dark:bg-neutral-800 rounded"></div>
             </div>
-            <div class="h-4 w-full bg-neutral-800 rounded mb-2"></div>
-            <div class="h-4 w-2/3 bg-neutral-800 rounded"></div>
+            <div class="h-4 w-full bg-neutral-200 dark:bg-neutral-800 rounded mb-2"></div>
+            <div class="h-4 w-2/3 bg-neutral-200 dark:bg-neutral-800 rounded"></div>
           </div>
         {/each}
       </div>
@@ -90,7 +90,7 @@
       <div class="grid md:grid-cols-3 gap-6">
         {#each repositories as { name, icon, stars, url }}
           <article
-            class="group p-6 rounded-lg border border-neutral-800 bg-surface-light hover:border-neutral-700 hover:bg-surface-lighter transition-all duration-300"
+            class="group p-6 rounded-lg border border-neutral-200 dark:border-neutral-800 bg-neutral-50 dark:bg-surface-light hover:border-neutral-300 dark:hover:border-neutral-700 hover:bg-neutral-100 dark:hover:bg-surface-lighter transition-all duration-300"
           >
             <!-- Header -->
             <div class="flex items-center justify-between mb-5">
@@ -101,7 +101,7 @@
                   class="w-10 h-10 rounded-full grayscale group-hover:grayscale-0 transition-all duration-500"
                 />
                 <h3
-                  class="font-medium text-neutral-200 group-hover:text-white transition-colors duration-300"
+                  class="font-medium text-neutral-800 dark:text-neutral-200 group-hover:text-neutral-900 dark:group-hover:text-white transition-colors duration-300"
                 >
                   {name}
                 </h3>
@@ -121,10 +121,10 @@
               href={formatMyPRsUrl(url)}
               target="_blank"
               rel="noopener noreferrer"
-              class="inline-flex items-center gap-2 text-sm text-neutral-500 hover:text-white transition-colors duration-300 group/link"
+              class="inline-flex items-center gap-2 text-sm text-neutral-600 dark:text-neutral-500 hover:text-neutral-900 dark:hover:text-white transition-colors duration-300 group/link"
             >
               <span
-                class="w-6 h-px bg-neutral-700 group-hover/link:w-10 group-hover/link:bg-white transition-all duration-300"
+                class="w-6 h-px bg-neutral-400 dark:bg-neutral-700 group-hover/link:w-10 group-hover/link:bg-neutral-900 dark:group-hover/link:bg-white transition-all duration-300"
               ></span>
               View my contributions
               <svg

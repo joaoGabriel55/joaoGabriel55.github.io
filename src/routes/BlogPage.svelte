@@ -36,7 +36,7 @@
       <a
         href="/"
         use:link
-        class="inline-flex items-center gap-3 text-sm text-neutral-400 hover:text-white transition-colors duration-300 mb-12 group"
+        class="inline-flex items-center gap-3 text-sm text-neutral-600 hover:text-neutral-900 dark:text-neutral-400 dark:hover:text-white transition-colors duration-300 mb-12 group"
       >
         <svg
           class="w-4 h-4 transform group-hover:-translate-x-1 transition-transform duration-300"
@@ -57,7 +57,7 @@
       <!-- Section Header -->
       <header class="mb-16 md:mb-20">
         <span
-          class="text-xs uppercase tracking-widest text-neutral-600 mb-4 block"
+          class="text-xs uppercase tracking-widest text-neutral-500 dark:text-neutral-600 mb-4 block"
         >
           Thoughts & Ideas
         </span>

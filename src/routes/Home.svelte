@@ -7,5 +7,5 @@
 
 <MainInfo />
 <Projects />
-<Blog />
 <OpenSource />
+<Blog />

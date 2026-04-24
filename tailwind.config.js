@@ -1,6 +1,7 @@
 /** @type {import('tailwindcss').Config} */
 export default {
   content: ["./src/**/*.{html,js,svelte,ts}"],
+  darkMode: "class",
   theme: {
     extend: {
       fontFamily: {
@@ -11,6 +12,11 @@ export default {
           DEFAULT: "#0a0a0a",
           light: "#141414",
           lighter: "#1a1a1a",
+        },
+        "surface-soft": {
+          DEFAULT: "#ffffff",
+          light: "#f5f5f5",
+          lighter: "#e5e5e5",
         },
         accent: {
           DEFAULT: "#e5e5e5",

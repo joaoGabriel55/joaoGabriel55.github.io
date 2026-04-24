@@ -27,19 +27,20 @@
 
 <nav aria-label="Social networks">
   <ul class="flex items-center justify-center gap-8">
-    {#each socialNetworks as { icon, alt, link, label }}
+    {#each socialNetworks as { icon, alt, link, label }, index}
       <li>
         <a
           href={link}
           target="_blank"
           rel="noopener noreferrer"
           aria-label={label}
-          class="group flex items-center justify-center w-12 h-12 rounded-full border border-neutral-800 hover:border-neutral-600 hover:bg-neutral-900 transition-all duration-300"
+          class="group flex items-center justify-center w-12 h-12 rounded-full border border-neutral-300 hover:border-neutral-500 hover:bg-neutral-100 dark:border-neutral-800 dark:hover:border-neutral-600 dark:hover:bg-neutral-900 transition-all duration-300"
         >
           <img
             src={icon}
             {alt}
-            class="w-5 h-5 opacity-60 group-hover:opacity-100 transition-opacity duration-300"
+            class={"w-5 h-5 opacity-60 group-hover:opacity-100 transition-opacity duration-300 dark:invert-0" +
+              (index === 0 ? " invert" : "")}
           />
         </a>
       </li>

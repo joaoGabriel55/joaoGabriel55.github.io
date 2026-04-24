@@ -14,7 +14,7 @@
 
 <button class="group cursor-pointer w-full text-left" on:click={goToPost}>
   <div
-    class="p-6 md:p-8 bg-surface-light rounded-lg border border-neutral-800 hover:border-neutral-700 transition-all duration-300 hover:bg-surface-lighter"
+    class="p-6 md:p-8 bg-neutral-50 dark:bg-surface-light rounded-lg border border-neutral-200 dark:border-neutral-800 hover:border-neutral-300 dark:hover:border-neutral-700 transition-all duration-300 hover:bg-neutral-100 dark:hover:bg-surface-lighter"
   >
     <!-- Date and Reading Time -->
     <div class="mb-6 space-y-2">
@@ -22,7 +22,7 @@
         <time class="text-xs text-neutral-500 tracking-wide uppercase">
           {formatDate(post.date)}
         </time>
-        <span class="text-neutral-700">·</span>
+        <span class="text-neutral-400 dark:text-neutral-700">·</span>
         <span class="text-xs text-neutral-500 tracking-wide">
           {readingTime} min read
         </span>
@@ -36,7 +36,7 @@
 
     <!-- Title -->
     <h3
-      class="heading-secondary mb-3 group-hover:text-white transition-colors duration-300"
+      class="heading-secondary mb-3 group-hover:text-neutral-900 dark:group-hover:text-white transition-colors duration-300"
     >
       {post.title}
     </h3>
@@ -50,7 +50,7 @@
     <div class="flex flex-wrap gap-2 mb-5">
       {#each post.tags.slice(0, 3) as tag}
         <span
-          class="px-2 py-1 text-xs tracking-wide text-neutral-500 bg-neutral-900 rounded"
+          class="px-2 py-1 text-xs tracking-wide text-neutral-600 dark:text-neutral-500 bg-neutral-200 dark:bg-neutral-900 rounded"
         >
           #{tag}
         </span>
@@ -59,10 +59,10 @@
 
     <!-- Read More Link -->
     <div
-      class="inline-flex items-center gap-3 text-sm text-neutral-400 group-hover:text-white transition-colors duration-300"
+      class="inline-flex items-center gap-3 text-sm text-neutral-600 dark:text-neutral-400 group-hover:text-neutral-900 dark:group-hover:text-white transition-colors duration-300"
     >
       <span
-        class="w-6 h-px bg-neutral-700 group-hover:w-10 group-hover:bg-white transition-all duration-300"
+        class="w-6 h-px bg-neutral-400 dark:bg-neutral-700 group-hover:w-10 group-hover:bg-neutral-900 dark:group-hover:bg-white transition-all duration-300"
       ></span>
       Read Article
       <svg

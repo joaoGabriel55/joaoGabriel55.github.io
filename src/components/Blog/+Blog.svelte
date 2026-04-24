@@ -12,12 +12,12 @@
   });
 </script>
 
-<section class="py-24 md:py-32 border-t border-neutral-900" id="blog">
+<section class="py-24 md:py-32 border-t border-neutral-200 dark:border-neutral-900" id="blog">
   <div class="section-container">
     <!-- Section Header -->
     <header class="mb-16 md:mb-20">
       <span
-        class="text-xs uppercase tracking-widest text-neutral-600 mb-4 block"
+        class="text-xs uppercase tracking-widest text-neutral-500 dark:text-neutral-600 mb-4 block"
       >
         Thoughts & Ideas
       </span>
@@ -41,7 +41,7 @@
         <a
           href="/blog"
           use:link
-          class="inline-flex items-center gap-3 text-sm text-neutral-400 hover:text-white transition-colors duration-300 group"
+          class="inline-flex items-center gap-3 text-sm text-neutral-600 hover:text-neutral-900 dark:text-neutral-400 dark:hover:text-white transition-colors duration-300 group"
         >
           View all posts
           <svg
