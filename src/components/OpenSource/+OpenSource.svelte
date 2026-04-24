@@ -11,9 +11,25 @@
 
   let loading = true;
 
+  interface GithubRepo {
+    name: string;
+    description: string | null;
+    html_url: string;
+    stargazers_count: number;
+    owner: { avatar_url: string };
+  }
+
+  const CACHE_TTL_MS = 60 * 60 * 1000; // 1 hour
+  const repoCache = new Map<string, { data: GithubRepo; expiresAt: number }>();
+
   async function fetchRepository(url: string) {
+    const cached = repoCache.get(url);
+    if (cached && Date.now() < cached.expiresAt) return cached.data;
+
     const response = await fetch(`https://api.github.com/repos/${url}`);
-    return response.json();
+    const data = await response.json() as GithubRepo;
+    repoCache.set(url, { data, expiresAt: Date.now() + CACHE_TTL_MS });
+    return data;
   }
 
   async function fetchRepositories() {
@@ -24,7 +40,7 @@
       fetchRepository("forem/forem"),
     ]);
 
-    return response.map((repo: any) => ({
+    return response.map((repo) => ({
       icon: repo.owner.avatar_url,
       name: repo.name,
       stars: repo.stargazers_count,
