@@ -1,17 +1,17 @@
 <script lang="ts">
   import theInvoicePreview from "../../lib/assets/projects/the_invoice.jpeg";
   import pokerEstimaPreview from "../../lib/assets/projects/poker_estima.jpeg";
-  import liveZenTube from "../../lib/assets/projects/livezentube.jpeg";
+  import notificare from "../../lib/assets/projects/notificare.svg";
 
   const projects = [
     {
-      title: "LiveZenTube",
+      title: "Notificare",
       description:
-        "A lightweight, client-side web app for monitoring and watch YouTube live streams across multiple channels. Everything runs in the browser using the YouTube Data API v3.",
-      stack: ["HTML", "CSS", "JavaScript"],
-      image: liveZenTube,
-      link: "https://livezentube.netlify.app/",
-      repository: "https://github.com/joaoGabriel55/live-hub",
+        "Notificare (Romanian: 'to notify') is a Rails engine built on top of ActiveJob::Continuation. It adds a persisted projection of running-job progress, a durable user-facing notification inbox, and a Hotwire UI scaffold — turning Continuation's resumable steps into a state machine that drives notifications without manual broadcast plumbing.",
+      stack: ["Ruby", "Ruby on Rails"],
+      image: notificare,
+      link: "https://rubygems.org/gems/notificare",
+      repository: "https://github.com/joaoGabriel55/notificare",
     },
     {
       title: "Poker Estima",
@@ -42,7 +42,9 @@
   ];
 </script>
 
-<section class="py-24 md:py-32 border-t border-neutral-200 dark:border-neutral-900">
+<section
+  class="py-24 md:py-32 border-t border-neutral-200 dark:border-neutral-900"
+>
   <div class="section-container">
     <!-- Section Header -->
     <header class="mb-16 md:mb-20">
