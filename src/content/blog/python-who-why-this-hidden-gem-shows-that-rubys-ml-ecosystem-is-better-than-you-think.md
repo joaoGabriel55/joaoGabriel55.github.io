@@ -5,11 +5,13 @@ description: ""
 tags: ["ruby", "machine learning"]
 ---
 
-Okay, I got your attention. If you have not read this interesting [blog post](https://blog.codeminer42.com/why-a-1990s-machine-learning-algorithm-destroys-llms-at-predicting-house-prices/), no problem, you can read it later, because this post can be a good complement to it. In the machine learning field, it's very common to use Python as the default language to build and use machine learning algorithms. But some people aren't so familiar with the language and, most of the time, choose it to start working with Artificial Intelligence without thinking twice. If you come from the Ruby community, though, I have good news: you don't need to use Python to work with ML. You can use a "hidden" (or not-so-hyped) gem called [Rumale](https://github.com/yoshoku/rumale), and in this post I'll show how to use it in practical, real-world use cases.
+Got your attention? Good. If you haven’t yet read the insightful [blog post](https://blog.codeminer42.com/why-a-1990s-machine-learning-algorithm-destroys-llms-at-predicting-house-prices/) used as a reference for a RubyConf talk, there’s no need to rush. Feel free to read it later, this article makes an excellent complement to it.
+
+In the machine learning field, it's very common to use Python as the default language to build and use machine learning algorithms. But some people aren't so familiar with the language and, most of the time, choose it to start working with Artificial Intelligence without thinking twice. If you come from the Ruby community, though, I have good news: you don't need to use Python to work with ML. You can use a "hidden" (or not-so-hyped) gem called [Rumale](https://github.com/yoshoku/rumale), and in this post I'll show how to use it in practical, real-world use cases.
 
 Nowadays, as devs living in our tech bubble, we're breathing the AI age, surrounded by information about LLM models, agents, and so on. As a result, some foundational and important concepts get forgotten, in this case: Machine Learning.
 
-### But First, Let's Recap What Machine Learning Is
+### Let's Recap What Machine Learning Is
 
 > All machine learning is AI, but not all AI is machine learning.
 
