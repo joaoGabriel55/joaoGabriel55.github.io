@@ -1,0 +1,605 @@
+{
+  "schemaVersion": 2,
+  "generatedAt": "2026-10-04T13:26:48.887482+00:00",
+  "title": "Design System: Gabriel Quaresma",
+  "extensions": {
+    "colorMeta": {
+      "carbon": {
+        "role": "neutral",
+        "displayName": "Carbon",
+        "canonical": "#0a0a0a",
+        "tonalRamp": [
+          "#0a0a0a",
+          "#171717",
+          "#262626",
+          "#404040",
+          "#737373",
+          "#a3a3a3",
+          "#e5e5e5",
+          "#fafafa"
+        ]
+      },
+      "carbon-raised": {
+        "role": "neutral",
+        "displayName": "Carbon Raised",
+        "canonical": "#141414",
+        "tonalRamp": [
+          "#0a0a0a",
+          "#171717",
+          "#262626",
+          "#404040",
+          "#737373",
+          "#a3a3a3",
+          "#e5e5e5",
+          "#fafafa"
+        ]
+      },
+      "carbon-lifted": {
+        "role": "neutral",
+        "displayName": "Carbon Lifted",
+        "canonical": "#1a1a1a",
+        "tonalRamp": [
+          "#0a0a0a",
+          "#171717",
+          "#262626",
+          "#404040",
+          "#737373",
+          "#a3a3a3",
+          "#e5e5e5",
+          "#fafafa"
+        ]
+      },
+      "bond-paper": {
+        "role": "neutral",
+        "displayName": "Bond Paper",
+        "canonical": "#ffffff",
+        "tonalRamp": [
+          "#0a0a0a",
+          "#171717",
+          "#262626",
+          "#404040",
+          "#737373",
+          "#a3a3a3",
+          "#e5e5e5",
+          "#fafafa"
+        ]
+      },
+      "bond-raised": {
+        "role": "neutral",
+        "displayName": "Bond Raised",
+        "canonical": "#fafafa",
+        "tonalRamp": [
+          "#0a0a0a",
+          "#171717",
+          "#262626",
+          "#404040",
+          "#737373",
+          "#a3a3a3",
+          "#e5e5e5",
+          "#fafafa"
+        ]
+      },
+      "bond-lifted": {
+        "role": "neutral",
+        "displayName": "Bond Lifted",
+        "canonical": "#f5f5f5",
+        "tonalRamp": [
+          "#0a0a0a",
+          "#171717",
+          "#262626",
+          "#404040",
+          "#737373",
+          "#a3a3a3",
+          "#e5e5e5",
+          "#fafafa"
+        ]
+      },
+      "ink": {
+        "role": "neutral",
+        "displayName": "Ink",
+        "canonical": "#171717",
+        "tonalRamp": [
+          "#0a0a0a",
+          "#171717",
+          "#262626",
+          "#404040",
+          "#737373",
+          "#a3a3a3",
+          "#e5e5e5",
+          "#fafafa"
+        ]
+      },
+      "graphite": {
+        "role": "neutral",
+        "displayName": "Graphite",
+        "canonical": "#525252",
+        "tonalRamp": [
+          "#0a0a0a",
+          "#171717",
+          "#262626",
+          "#404040",
+          "#737373",
+          "#a3a3a3",
+          "#e5e5e5",
+          "#fafafa"
+        ]
+      },
+      "pencil": {
+        "role": "neutral",
+        "displayName": "Pencil",
+        "canonical": "#6b6b6b",
+        "tonalRamp": [
+          "#0a0a0a",
+          "#171717",
+          "#262626",
+          "#404040",
+          "#737373",
+          "#a3a3a3",
+          "#e5e5e5",
+          "#fafafa"
+        ]
+      },
+      "pencil-dark": {
+        "role": "neutral",
+        "displayName": "Pencil Dark",
+        "canonical": "#8a8a8a",
+        "tonalRamp": [
+          "#0a0a0a",
+          "#171717",
+          "#262626",
+          "#404040",
+          "#737373",
+          "#a3a3a3",
+          "#e5e5e5",
+          "#fafafa"
+        ]
+      },
+      "chalk": {
+        "role": "neutral",
+        "displayName": "Chalk",
+        "canonical": "#a3a3a3",
+        "tonalRamp": [
+          "#0a0a0a",
+          "#171717",
+          "#262626",
+          "#404040",
+          "#737373",
+          "#a3a3a3",
+          "#e5e5e5",
+          "#fafafa"
+        ]
+      },
+      "smudge": {
+        "role": "neutral",
+        "displayName": "Smudge",
+        "canonical": "#d4d4d4",
+        "tonalRamp": [
+          "#0a0a0a",
+          "#171717",
+          "#262626",
+          "#404040",
+          "#737373",
+          "#a3a3a3",
+          "#e5e5e5",
+          "#fafafa"
+        ]
+      },
+      "hairline": {
+        "role": "neutral",
+        "displayName": "Hairline",
+        "canonical": "#e5e5e5",
+        "tonalRamp": [
+          "#0a0a0a",
+          "#171717",
+          "#262626",
+          "#404040",
+          "#737373",
+          "#a3a3a3",
+          "#e5e5e5",
+          "#fafafa"
+        ]
+      },
+      "hairline-dark": {
+        "role": "neutral",
+        "displayName": "Hairline Dark",
+        "canonical": "#262626",
+        "tonalRamp": [
+          "#0a0a0a",
+          "#171717",
+          "#262626",
+          "#404040",
+          "#737373",
+          "#a3a3a3",
+          "#e5e5e5",
+          "#fafafa"
+        ]
+      },
+      "code-keyword": {
+        "role": "tertiary",
+        "displayName": "Plum",
+        "canonical": "#8b2f6b",
+        "tonalRamp": [
+          "#0a0a0a",
+          "#171717",
+          "#262626",
+          "#404040",
+          "#737373",
+          "#a3a3a3",
+          "#e5e5e5",
+          "#fafafa"
+        ]
+      },
+      "code-keyword-dark": {
+        "role": "tertiary",
+        "displayName": "Plum Dark",
+        "canonical": "#d49ac4",
+        "tonalRamp": [
+          "#0a0a0a",
+          "#171717",
+          "#262626",
+          "#404040",
+          "#737373",
+          "#a3a3a3",
+          "#e5e5e5",
+          "#fafafa"
+        ]
+      },
+      "code-string": {
+        "role": "tertiary",
+        "displayName": "Moss",
+        "canonical": "#2f6b3a",
+        "tonalRamp": [
+          "#0a0a0a",
+          "#171717",
+          "#262626",
+          "#404040",
+          "#737373",
+          "#a3a3a3",
+          "#e5e5e5",
+          "#fafafa"
+        ]
+      },
+      "code-string-dark": {
+        "role": "tertiary",
+        "displayName": "Moss Dark",
+        "canonical": "#9ccc8c",
+        "tonalRamp": [
+          "#0a0a0a",
+          "#171717",
+          "#262626",
+          "#404040",
+          "#737373",
+          "#a3a3a3",
+          "#e5e5e5",
+          "#fafafa"
+        ]
+      },
+      "code-number": {
+        "role": "tertiary",
+        "displayName": "Burnt Orange",
+        "canonical": "#a14b12",
+        "tonalRamp": [
+          "#0a0a0a",
+          "#171717",
+          "#262626",
+          "#404040",
+          "#737373",
+          "#a3a3a3",
+          "#e5e5e5",
+          "#fafafa"
+        ]
+      },
+      "code-number-dark": {
+        "role": "tertiary",
+        "displayName": "Burnt Orange Dark",
+        "canonical": "#e3a46c",
+        "tonalRamp": [
+          "#0a0a0a",
+          "#171717",
+          "#262626",
+          "#404040",
+          "#737373",
+          "#a3a3a3",
+          "#e5e5e5",
+          "#fafafa"
+        ]
+      },
+      "code-title": {
+        "role": "tertiary",
+        "displayName": "Slate Blue",
+        "canonical": "#1f5f9e",
+        "tonalRamp": [
+          "#0a0a0a",
+          "#171717",
+          "#262626",
+          "#404040",
+          "#737373",
+          "#a3a3a3",
+          "#e5e5e5",
+          "#fafafa"
+        ]
+      },
+      "code-title-dark": {
+        "role": "tertiary",
+        "displayName": "Slate Blue Dark",
+        "canonical": "#8fb8e6",
+        "tonalRamp": [
+          "#0a0a0a",
+          "#171717",
+          "#262626",
+          "#404040",
+          "#737373",
+          "#a3a3a3",
+          "#e5e5e5",
+          "#fafafa"
+        ]
+      },
+      "code-type": {
+        "role": "tertiary",
+        "displayName": "Ochre",
+        "canonical": "#7a5300",
+        "tonalRamp": [
+          "#0a0a0a",
+          "#171717",
+          "#262626",
+          "#404040",
+          "#737373",
+          "#a3a3a3",
+          "#e5e5e5",
+          "#fafafa"
+        ]
+      },
+      "code-type-dark": {
+        "role": "tertiary",
+        "displayName": "Ochre Dark",
+        "canonical": "#d9b86a",
+        "tonalRamp": [
+          "#0a0a0a",
+          "#171717",
+          "#262626",
+          "#404040",
+          "#737373",
+          "#a3a3a3",
+          "#e5e5e5",
+          "#fafafa"
+        ]
+      },
+      "code-symbol": {
+        "role": "tertiary",
+        "displayName": "Teal",
+        "canonical": "#0f6b6b",
+        "tonalRamp": [
+          "#0a0a0a",
+          "#171717",
+          "#262626",
+          "#404040",
+          "#737373",
+          "#a3a3a3",
+          "#e5e5e5",
+          "#fafafa"
+        ]
+      },
+      "code-symbol-dark": {
+        "role": "tertiary",
+        "displayName": "Teal Dark",
+        "canonical": "#7cc7c0",
+        "tonalRamp": [
+          "#0a0a0a",
+          "#171717",
+          "#262626",
+          "#404040",
+          "#737373",
+          "#a3a3a3",
+          "#e5e5e5",
+          "#fafafa"
+        ]
+      }
+    },
+    "typographyMeta": {
+      "display": {
+        "displayName": "Display",
+        "purpose": "Hero name only; 2.25rem, then 3rem at md, then 3.75rem at lg."
+      },
+      "headline": {
+        "displayName": "Headline",
+        "purpose": "Section headings and post titles."
+      },
+      "title": {
+        "displayName": "Title",
+        "purpose": "Project names and blog-card titles."
+      },
+      "body": {
+        "displayName": "Body",
+        "purpose": "Intro, descriptions, and article prose; 1rem on mobile, 1.125rem at md."
+      },
+      "label": {
+        "displayName": "Label",
+        "purpose": "Uppercase tracked eyebrows, dates, and meta."
+      },
+      "code": {
+        "displayName": "Code",
+        "purpose": "Inline code and pre blocks in posts."
+      }
+    },
+    "shadows": [],
+    "motion": [
+      {
+        "name": "color-shift",
+        "value": "300ms ease",
+        "purpose": "Text, border, background, and dash-width transitions."
+      },
+      {
+        "name": "theme-shift",
+        "value": "300ms ease",
+        "purpose": "Body background and color on theme toggle."
+      },
+      {
+        "name": "veil-fade",
+        "value": "500ms",
+        "purpose": "Photo veil fade and repo avatar color reveal."
+      },
+      {
+        "name": "develop",
+        "value": "700ms ease-out",
+        "purpose": "Grayscale to color, opacity, and 105% scale on photos."
+      },
+      {
+        "name": "scroll-hint",
+        "value": "pulse 2s cubic-bezier(0.4,0,0.6,1) infinite",
+        "purpose": "Hero scroll indicator line only."
+      }
+    ],
+    "breakpoints": [
+      {
+        "name": "md",
+        "value": "768px"
+      },
+      {
+        "name": "lg",
+        "value": "1024px"
+      }
+    ]
+  },
+  "components": [
+    {
+      "name": "Dash Link",
+      "kind": "custom",
+      "refersTo": "link-dash",
+      "description": "Signature text CTA: a leading 1px dash grows and darkens on hover, arrow nudges right.",
+      "html": "<a class=\"ds-dash-link\" href=\"#\"><span class=\"ds-dash\"></span>View Source Code<span class=\"ds-arrow\"><svg width=\"16\" height=\"16\" fill=\"none\" stroke=\"currentColor\" viewBox=\"0 0 24 24\"><path stroke-linecap=\"round\" stroke-linejoin=\"round\" stroke-width=\"1.5\" d=\"M17 8l4 4m0 0l-4 4m4-4H3\"/></svg></span></a>",
+      "css": ".ds-dash-link{font-family:system-ui,-apple-system,BlinkMacSystemFont,'Segoe UI',Roboto,'Helvetica Neue',Arial,sans-serif;display:inline-flex;align-items:center;gap:12px;font-size:14px;color:#525252;text-decoration:none;transition:color .3s}.ds-dash{width:32px;height:1px;background:#a3a3a3;transition:all .3s}.ds-arrow{display:inline-flex;transition:transform .3s}.ds-dash-link:hover,.ds-dash-link:focus-visible{color:#171717}.ds-dash-link:hover .ds-dash,.ds-dash-link:focus-visible .ds-dash{width:48px;background:#171717}.ds-dash-link:hover .ds-arrow{transform:translateX(4px)}.ds-dash-link:focus-visible{outline:1px solid #171717;outline-offset:4px}"
+    },
+    {
+      "name": "Card",
+      "kind": "card",
+      "refersTo": "card",
+      "description": "Flat raised surface: tonal step plus hairline, brightens one step on hover. No shadow.",
+      "html": "<article class=\"ds-card\"><span class=\"ds-card-meta\">Mar 13, 2026 · 9 min read</span><h3 class=\"ds-card-title\">Why a 1990s ML Algorithm Destroys LLMs</h3><p class=\"ds-card-body\">Backed by benchmark experiments: when traditional ML wins.</p></article>",
+      "css": ".ds-card{font-family:system-ui,-apple-system,BlinkMacSystemFont,'Segoe UI',Roboto,'Helvetica Neue',Arial,sans-serif;padding:24px;background:#fafafa;border:1px solid #e5e5e5;border-radius:8px;transition:all .3s;max-width:360px}.ds-card:hover{background:#f5f5f5;border-color:#d4d4d4}.ds-card-meta{font-size:12px;letter-spacing:.025em;text-transform:uppercase;color:#6b6b6b}.ds-card-title{margin:16px 0 12px;font-size:24px;font-weight:300;letter-spacing:-.025em;color:#262626}.ds-card:hover .ds-card-title{color:#171717}.ds-card-body{margin:0;font-size:14px;font-weight:300;line-height:1.625;color:#525252}"
+    },
+    {
+      "name": "Outline Chip",
+      "kind": "chip",
+      "refersTo": "chip-outline",
+      "description": "Pill label for tech stack and post tags. Static.",
+      "html": "<span class=\"ds-chip-outline\">Ruby on Rails</span>",
+      "css": ".ds-chip-outline{font-family:system-ui,-apple-system,BlinkMacSystemFont,'Segoe UI',Roboto,'Helvetica Neue',Arial,sans-serif;display:inline-block;padding:4px 12px;font-size:12px;letter-spacing:.025em;color:#525252;border:1px solid #d4d4d4;border-radius:9999px}"
+    },
+    {
+      "name": "Filled Tag",
+      "kind": "chip",
+      "refersTo": "chip-filled",
+      "description": "Small hash tag on blog cards.",
+      "html": "<span class=\"ds-chip-filled\">#machine learning</span>",
+      "css": ".ds-chip-filled{font-family:system-ui,-apple-system,BlinkMacSystemFont,'Segoe UI',Roboto,'Helvetica Neue',Arial,sans-serif;display:inline-block;padding:4px 8px;font-size:12px;letter-spacing:.025em;color:#525252;background:#e5e5e5;border-radius:4px}"
+    },
+    {
+      "name": "Round Icon Button",
+      "kind": "button",
+      "refersTo": "icon-button-small",
+      "description": "Circular hairline button for social links and the theme toggle.",
+      "html": "<button class=\"ds-icon-btn\" aria-label=\"Toggle theme\"><svg width=\"16\" height=\"16\" fill=\"none\" stroke=\"currentColor\" viewBox=\"0 0 24 24\"><path stroke-linecap=\"round\" stroke-linejoin=\"round\" stroke-width=\"1.5\" d=\"M21 12.79A9 9 0 1111.21 3 7 7 0 0021 12.79z\"/></svg></button>",
+      "css": ".ds-icon-btn{display:inline-flex;align-items:center;justify-content:center;width:36px;height:36px;border-radius:9999px;border:1px solid #e5e5e5;background:transparent;color:#525252;cursor:pointer;transition:all .3s}.ds-icon-btn:hover{color:#171717;border-color:#a3a3a3;background:#f5f5f5}.ds-icon-btn:focus-visible{outline:1px solid #171717;outline-offset:3px}"
+    },
+    {
+      "name": "Header Nav",
+      "kind": "nav",
+      "refersTo": "",
+      "description": "Fixed translucent header: name as home link, Blog link, theme toggle.",
+      "html": "<header class=\"ds-nav\"><button class=\"ds-nav-home\">Gabriel Quaresma</button><div class=\"ds-nav-right\"><a class=\"ds-nav-link\" href=\"#\">Blog</a><button class=\"ds-icon-btn\" aria-label=\"Toggle theme\"><svg width=\"16\" height=\"16\" fill=\"none\" stroke=\"currentColor\" viewBox=\"0 0 24 24\"><path stroke-linecap=\"round\" stroke-linejoin=\"round\" stroke-width=\"1.5\" d=\"M21 12.79A9 9 0 1111.21 3 7 7 0 0021 12.79z\"/></svg></button></div></header>",
+      "css": ".ds-nav{font-family:system-ui,-apple-system,BlinkMacSystemFont,'Segoe UI',Roboto,'Helvetica Neue',Arial,sans-serif;display:flex;align-items:center;justify-content:space-between;padding:16px 24px;background:rgba(255,255,255,.8);backdrop-filter:blur(12px);border-bottom:1px solid #e5e5e5}.ds-nav-home{font-family:system-ui,-apple-system,BlinkMacSystemFont,'Segoe UI',Roboto,'Helvetica Neue',Arial,sans-serif;background:none;border:0;padding:0;cursor:pointer;font-size:16px;font-weight:300;letter-spacing:.025em;color:#404040;transition:color .3s}.ds-nav-home:hover{color:#171717}.ds-nav-right{display:flex;align-items:center;gap:32px}.ds-nav-link{font-size:14px;font-weight:300;letter-spacing:.025em;color:#6b6b6b;text-decoration:none;transition:color .3s}.ds-nav-link:hover{color:#171717}.ds-icon-btn{display:inline-flex;align-items:center;justify-content:center;width:36px;height:36px;border-radius:9999px;border:1px solid #e5e5e5;background:transparent;color:#525252;cursor:pointer;transition:all .3s}.ds-icon-btn:hover{color:#171717;border-color:#a3a3a3;background:#f5f5f5}.ds-icon-btn:focus-visible{outline:1px solid #171717;outline-offset:3px}"
+    },
+    {
+      "name": "Section Header",
+      "kind": "custom",
+      "refersTo": "",
+      "description": "Uppercase tracked eyebrow above a light headline and lede.",
+      "html": "<header class=\"ds-section-head\"><span class=\"ds-eyebrow\">Selected Work</span><h2 class=\"ds-headline\">Projects</h2><p class=\"ds-lede\">Writing about software development, technology, and lessons learned along the way.</p></header>",
+      "css": ".ds-section-head{font-family:system-ui,-apple-system,BlinkMacSystemFont,'Segoe UI',Roboto,'Helvetica Neue',Arial,sans-serif;}.ds-eyebrow{display:block;margin-bottom:16px;font-size:12px;letter-spacing:.1em;text-transform:uppercase;color:#6b6b6b}.ds-headline{margin:0;font-size:36px;font-weight:300;letter-spacing:-.025em;color:#171717}.ds-lede{margin:16px 0 0;max-width:42rem;font-size:18px;font-weight:300;line-height:1.625;color:#525252}"
+    },
+    {
+      "name": "Code Block",
+      "kind": "custom",
+      "refersTo": "",
+      "description": "Syntax-highlighted article code with a pinned language label.",
+      "html": "<pre class=\"ds-pre\" data-lang=\"Ruby\"><code><span class=\"c\"># Gemfile</span>\n<span class=\"k\">def</span> <span class=\"t\">predict</span>(features)\n  model.<span class=\"t\">predict</span>(features, <span class=\"s\">:price</span>) * <span class=\"n\">1.0</span>\n<span class=\"k\">end</span></code></pre>",
+      "css": ".ds-pre{position:relative;margin:0;padding:24px;background:#f5f5f5;border:1px solid #e5e5e5;border-radius:8px;overflow-x:auto;font:14px/1.625 ui-monospace,SFMono-Regular,Menlo,Consolas,monospace;color:#262626}.ds-pre::before{content:attr(data-lang);display:block;margin-bottom:12px;font-family:system-ui,-apple-system,BlinkMacSystemFont,'Segoe UI',Roboto,'Helvetica Neue',Arial,sans-serif;font-size:11px;letter-spacing:.1em;text-transform:uppercase;color:#6b6b6b}.ds-pre .k{color:#8b2f6b}.ds-pre .t{color:#1f5f9e}.ds-pre .s{color:#0f6b6b}.ds-pre .n{color:#a14b12}.ds-pre .c{color:#6b6b6b;font-style:italic}"
+    },
+    {
+      "name": "Photo Frame",
+      "kind": "custom",
+      "refersTo": "",
+      "description": "16:9 grayscale image that turns to color and scales on hover.",
+      "html": "<a class=\"ds-photo\" href=\"#\"><div class=\"ds-photo-img\"></div><div class=\"ds-photo-veil\"></div></a>",
+      "css": ".ds-photo{position:relative;display:block;width:320px;aspect-ratio:16/9;overflow:hidden;border-radius:8px;background:#f5f5f5}.ds-photo-img{position:absolute;inset:0;background:linear-gradient(135deg,#c2410c,#0e7490);filter:grayscale(1);opacity:.8;transition:all .7s ease-out}.ds-photo-veil{position:absolute;inset:0;background:linear-gradient(to top,rgba(255,255,255,.5),transparent);opacity:.6;transition:opacity .5s}.ds-photo:hover .ds-photo-img{filter:grayscale(0);opacity:1;transform:scale(1.05)}.ds-photo:hover .ds-photo-veil{opacity:0}"
+    }
+  ],
+  "narrative": {
+    "northStar": "The Monochrome Notebook",
+    "overview": "The site reads like an engineer's notebook. It uses graphite tones on a page, single-pixel ruled lines, and thin type set at about the weight of a pencil stroke. There is no hue anywhere in the system. Every color is a step on one achromatic neutral scale, and the page switches between two papers: **Bond Paper** (white) in light mode and **Carbon** (near-black) in dark mode. Hierarchy comes from type weight, tracking, and whitespace, never from color.\n\nThe mood is **calm**. Transitions are slow (300ms for color, 500–700ms for image reveals). Sections breathe, with 96–128px between them. Nothing animates unless the visitor does something, apart from the slow pulse of the scroll hint in the hero. Interactive pieces are **soft and tactile**: rounded cards and pill chips that brighten one tonal step when touched, links whose leading dash grows, and photographs that move from grayscale to full color on hover. That hover is the only moment of color in the whole system.\n\nBoth themes are equal. Every surface, line, and text role has a light and a dark value, and neither theme is treated as the default.",
+    "keyCharacteristics": [
+      "Strictly achromatic. Color only enters through photographs (on hover) and syntax-highlighted code.",
+      "Light-weight system sans (200–300) for everything except tiny labels and code.",
+      "Flat by rule. Depth comes from tonal steps and 1px hairlines, never shadows.",
+      "Uppercase, widely tracked eyebrow labels above light headlines (`.eyebrow`).",
+      "Slow, quiet motion that responds to the visitor.",
+      "Paired light and dark values for every role."
+    ],
+    "rules": [
+      {
+        "name": "The No-Hue Rule",
+        "body": "No hue exists in the UI. If a new element needs emphasis, step it along the neutral scale or change its type weight. Do not add an accent color. The single exception is syntax highlighting inside code blocks (see Code Tokens), where hue carries meaning for the reader.",
+        "section": "colors"
+      },
+      {
+        "name": "The Paired Value Rule",
+        "body": "Every color assignment comes as a light/dark pair. A role defined for one theme only is incomplete. Hand-written CSS reads the paired role variables on `:root` / `:root.dark` in `src/app.css` (`--ink`, `--text-prose`, `--line`, and so on) and never hard-codes hex.",
+        "section": "colors"
+      },
+      {
+        "name": "The Readable Whisper Rule",
+        "body": "Quiet text still clears WCAG AA (4.5:1) on the surface it sits on, in both themes. Get quieter by size, case, and tracking, not by dropping below Pencil / Pencil Dark.",
+        "section": "colors"
+      },
+      {
+        "name": "The Develop-on-Touch Rule",
+        "body": "Photographs (profile, project previews, repo avatars) rest in grayscale and return to color only on hover. This is the only place color appears.",
+        "section": "colors"
+      },
+      {
+        "name": "The Pencil Weight Rule",
+        "body": "Headings use weights 200–300, never bold. Emphasis comes from size, tracking, and the ink/graphite contrast, not from weight.",
+        "section": "typography"
+      },
+      {
+        "name": "The Eyebrow Rule",
+        "body": "Every section heading has a tiny uppercase tracked label above it (in Pencil or Graphite) that names the section's role in plain words.",
+        "section": "typography"
+      },
+      {
+        "name": "The Flat-By-Rule Rule",
+        "body": "Never add box-shadows. To make something feel raised, step its background one tone toward the opposite paper and darken its hairline.",
+        "section": "elevation"
+      }
+    ],
+    "dos": [
+      "Do take every color from the neutral scale and give it a light/dark pair (The Paired Value Rule).",
+      "Do set headings at weights 200–300 with -0.025em tracking, and put an uppercase 0.1em-tracked eyebrow label above section headings.",
+      "Do show \"raised\" and \"hover\" with a one-step tonal shift plus a hairline change (The Flat-By-Rule Rule).",
+      "Do use the Dash Link for any text call to action.",
+      "Do rest photos in grayscale and bring them to color on hover over 500–700ms.",
+      "Do keep transitions slow and calm: 300ms for color and border changes, 500–700ms for image reveals. Gate movement (scaling, sliding arrows, the pulse) behind `motion-safe:`; color and opacity changes stay for everyone.",
+      "Do give small text links a 44px hit area with the `.hit-area` utility (vertical padding cancelled by negative margin).",
+      "Do keep section rhythm at 96/128px with a top hairline between sections."
+    ],
+    "donts": [
+      "Don't add an accent hue, gradient color, or colored UI element (The No-Hue Rule). Code-token hues stay inside code blocks and never leak into UI chrome.",
+      "Don't use box-shadows for elevation.",
+      "Don't use bold headings or heavy weights for emphasis.",
+      "Don't use strokes thicker than 1px, apart from the existing 2px blockquote rule.",
+      "Don't design for one theme only.",
+      "Don't set meta or label text below Pencil / Pencil Dark (The Readable Whisper Rule).",
+      "Don't load a webfont. The system stack is the typeface."
+    ]
+  }
+}
