@@ -1,6 +1,6 @@
 {
   "schemaVersion": 2,
-  "generatedAt": "2026-10-04T13:48:25.128042+00:00",
+  "generatedAt": "2026-10-04T14:03:29.765847+00:00",
   "title": "Design System: Gabriel Quaresma",
   "extensions": {
     "colorMeta": {
@@ -442,11 +442,6 @@
         "name": "develop",
         "value": "700ms ease-out",
         "purpose": "Grayscale to color, opacity, and 105% scale on photos."
-      },
-      {
-        "name": "scroll-hint",
-        "value": "pulse 2s cubic-bezier(0.4,0,0.6,1) infinite",
-        "purpose": "Hero scroll indicator line only."
       }
     ],
     "breakpoints": [
@@ -536,7 +531,7 @@
   ],
   "narrative": {
     "northStar": "The Monochrome Notebook",
-    "overview": "The site reads like an engineer's notebook. It uses graphite tones on a page, single-pixel ruled lines, and thin type set at about the weight of a pencil stroke. There is no hue anywhere in the system. Every color is a step on one achromatic neutral scale, and the page switches between two papers: **Bond Paper** (white) in light mode and **Carbon** (near-black) in dark mode. Hierarchy comes from type weight, tracking, and whitespace, never from color.\n\nThe mood is **calm**. Transitions are slow (300ms for color, 500–700ms for image reveals). Sections breathe, with 96–128px between them. Nothing animates unless the visitor does something, apart from the slow pulse of the scroll hint in the hero. Interactive pieces are **soft and tactile**: rounded cards and pill chips that brighten one tonal step when touched, links whose leading dash grows, and photographs that move from grayscale to full color on hover. That hover is the only moment of color in the whole system.\n\nBoth themes are equal. Every surface, line, and text role has a light and a dark value, and neither theme is treated as the default.",
+    "overview": "The site reads like an engineer's notebook. It uses graphite tones on a page, single-pixel ruled lines, and thin type set at about the weight of a pencil stroke. There is no hue anywhere in the system. Every color is a step on one achromatic neutral scale, and the page switches between two papers: **Bond Paper** (white) in light mode and **Carbon** (near-black) in dark mode. Hierarchy comes from type weight, tracking, and whitespace, never from color.\n\nThe mood is **calm**. Transitions are slow (300ms for color, 500–700ms for image reveals). Sections breathe, with 96–128px between them. Nothing animates unless the visitor does something. Interactive pieces are **soft and tactile**: rounded cards and pill chips that brighten one tonal step when touched, links whose leading dash grows, and photographs that move from grayscale to full color on hover. That hover is the only moment of color in the whole system.\n\nBoth themes are equal. Every surface, line, and text role has a light and a dark value, and neither theme is treated as the default.",
     "keyCharacteristics": [
       "Strictly achromatic. Color only enters through photographs (on hover) and syntax-highlighted code.",
       "Light-weight system sans (200–300) for everything except tiny labels and code.",

@@ -2,10 +2,12 @@
   import type { BlogPost } from "../../lib/blog";
   import { formatDate, getReadingTime } from "../../lib/blog";
   import { link } from "svelte-spa-router";
+  import { getTalks } from "../../lib/talks";
 
   export let post: BlogPost;
 
   $: readingTime = getReadingTime(post.content);
+  $: companionTalk = getTalks().find((talk) => talk.relatedPostSlug === post.slug);
 </script>
 
 <a href="/blog/{post.slug}" use:link class="group block rounded-lg">
@@ -23,6 +25,11 @@
           {readingTime} min read
         </span>
       </div>
+      {#if companionTalk}
+        <p class="text-xs text-neutral-700 dark:text-neutral-300 tracking-wide">
+          Companion to my {companionTalk.event} talk
+        </p>
+      {/if}
       {#if post.updateDate}
         <p class="text-xs italic text-meta">
           Updated at {formatDate(post.updateDate)}
@@ -39,7 +46,7 @@
 
     <!-- Description -->
     {#if post.description}
-      <p class="text-body text-sm mb-5 line-clamp-2">
+      <p class="text-body text-sm mb-5 line-clamp-3">
         {post.description}
       </p>
     {/if}
@@ -84,9 +91,9 @@
 </a>
 
 <style>
-  .line-clamp-2 {
+  .line-clamp-3 {
     display: -webkit-box;
-    -webkit-line-clamp: 2;
+    -webkit-line-clamp: 3;
     -webkit-box-orient: vertical;
     overflow: hidden;
   }

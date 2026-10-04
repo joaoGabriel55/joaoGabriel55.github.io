@@ -1,7 +1,7 @@
 ---
 title: "Powering Your Database Queries with a LLMs and MCPs"
 date: "2026/02/15"
-description: ""
+description: "Turn plain-English questions into SQL with an LLM and the Model Context Protocol, built step by step with a Node.js + Express backend and a React + TypeScript frontend."
 tags: ["llm", "mcp", "database", "ai", "react.js", "javascript", "typescript"]
 ---
 

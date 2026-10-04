@@ -124,7 +124,7 @@ components:
 
 The site reads like an engineer's notebook. It uses graphite tones on a page, single-pixel ruled lines, and thin type set at about the weight of a pencil stroke. There is no hue anywhere in the system. Every color is a step on one achromatic neutral scale, and the page switches between two papers: **Bond Paper** (white) in light mode and **Carbon** (near-black) in dark mode. Hierarchy comes from type weight, tracking, and whitespace, never from color.
 
-The mood is **calm**. Transitions are slow (300ms for color, 500–700ms for image reveals). Sections breathe, with 96–128px between them. Nothing animates unless the visitor does something, apart from the slow pulse of the scroll hint in the hero. Interactive pieces are **soft and tactile**: rounded cards and pill chips that brighten one tonal step when touched, links whose leading dash grows, and photographs that move from grayscale to full color on hover. That hover is the only moment of color in the whole system.
+The mood is **calm**. Transitions are slow (300ms for color, 500–700ms for image reveals). Sections breathe, with 96–128px between them. Nothing animates unless the visitor does something. Interactive pieces are **soft and tactile**: rounded cards and pill chips that brighten one tonal step when touched, links whose leading dash grows, and photographs that move from grayscale to full color on hover. That hover is the only moment of color in the whole system.
 
 Both themes are equal. Every surface, line, and text role has a light and a dark value, and neither theme is treated as the default.
 
@@ -227,12 +227,22 @@ The shapes are softened rectangles and true circles.
 - **Gently rounded (8px):** cards, project image frames, `pre` blocks, and post images.
 - **Barely rounded (4px):** filled blog tags and inline code.
 - **Fully round:** the profile photo, repo avatars, social and theme-toggle buttons, and outline chips (pills).
-- **Lines:** 1px everywhere, whether borders, section rules, the gradient scroll hint, or link dashes. No thicker strokes, except the 2px blockquote rule in posts.
+- **Lines:** 1px everywhere, whether borders, section rules, or link dashes. No thicker strokes, except the 2px blockquote rule in posts.
 
 ## Components
 
 ### Dash Link (signature)
 The site's signature interaction, used for "Get in touch", "View Source Code", "View my contributions", and "Read Article". A 1px horizontal dash (24–32px) leads the text. On hover the dash grows to 40–48px and darkens to Ink (white in dark mode), the text moves from Graphite to Ink, and a trailing arrow (when present) slides 4px right. All of this happens over 300ms.
+
+### Contribution Rows
+The Open Source section is a hairline-ruled list, one row per repo, sorted by merged PR count. Each row has three columns on desktop and stacks on mobile:
+- the repo: a 32px grayscale avatar, its name in ink, and "N repo stars" in Pencil;
+- one representative merged PR, written as a sentence and linked with a resting hairline underline;
+- "N merged PRs →", linking to the full filtered list.
+Rows name real work rather than counts. Never show stars without labelling them as the repo's.
+
+### Project Links
+Each project leads with its live destination as the primary Dash Link, in ink with a darker dash: "Try the live app", "View on RubyGems", or "Visit {product}". "Source" follows as a secondary Dash Link in Graphite. Closed-source products show only the primary link.
 
 ### Cards / Containers
 - **Corner Style:** gently rounded (8px).
@@ -257,7 +267,7 @@ Contact is the one action that always stays at full ink weight. It appears in th
 Text links with a 16px single-color glyph (filled with currentColor) and a visible label: LinkedIn, GitHub, Instagram. Graphite at rest, ink on hover. Never brand-colored and never icon-only.
 
 ### Credentials Row
-A single line under the hero role line, in Ink-adjacent text at 14px with dot separators. Every item is a verifiable claim that links or jumps to its evidence (the Talks section, the RubyGems page, the Open Source section). Never put an unlinked or unverifiable claim here.
+A single line under the hero role line, at body size (16px) in Ink-adjacent text with dot separators. Each item has a resting hairline underline (Smudge, or Hairline Dark in dark mode) so it reads as clickable without hover. External items carry a small ↗. Every item is a verifiable claim that links or jumps to its evidence (the Talks section, the RubyGems page, the Open Source section). Never put an unlinked or unverifiable claim here.
 
 ### Navigation
 The header is fixed, translucent (80% paper with backdrop blur), and has a bottom hairline. The name sits on the left as a home button (light weight, wide tracking, 14–16px). The right side holds a "Blog" text link in Pencil that turns Ink on hover, followed by the theme toggle. The same layout is used on mobile.

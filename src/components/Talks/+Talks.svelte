@@ -126,7 +126,7 @@
       <div class="mt-8 md:mt-10 max-w-3xl space-y-4">
         <p class="text-xs uppercase text-meta">{meta(active)}</p>
         <h3 class="heading-secondary">{active.title}</h3>
-        <p class="text-body">{active.summary}</p>
+        <p class="text-body max-w-xl">{active.summary}</p>
 
         <div class="flex flex-wrap gap-x-8 gap-y-2 pt-2">
           {#if active.relatedPostSlug}

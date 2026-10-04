@@ -8,8 +8,9 @@
 
   const yearsExperience = new Date().getFullYear() - 2021;
 
+  // Resting hairline underline so the proof reads as clickable without hover.
   const credentialClass =
-    "hit-area border-b border-transparent hover:border-current transition-colors duration-300";
+    "hit-area border-b border-neutral-300 dark:border-neutral-700 hover:border-current transition-colors duration-300";
 </script>
 
 <section class="pt-28 pb-20 md:pt-40 md:pb-28">
@@ -41,7 +42,7 @@
 
     <!-- Proof, each item jumps to the evidence -->
     <ul
-      class="flex flex-col sm:flex-row sm:flex-wrap items-center justify-center gap-x-3 gap-y-1 text-sm text-neutral-800 dark:text-neutral-200"
+      class="flex flex-col sm:flex-row sm:flex-wrap items-center justify-center gap-x-3 gap-y-2 text-base text-neutral-800 dark:text-neutral-200"
       aria-label="Highlights"
     >
       <li>
@@ -55,9 +56,13 @@
           href="https://rubygems.org/gems/notificare"
           target="_blank"
           rel="noopener noreferrer"
-          class={credentialClass}
+          class="{credentialClass} inline-flex items-center gap-1"
         >
           Notificare on RubyGems
+          <svg class="w-3.5 h-3.5" fill="none" stroke="currentColor" viewBox="0 0 24 24" aria-hidden="true">
+            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M7 17L17 7M9 7h8v8" />
+          </svg>
+          <span class="sr-only">(opens RubyGems in a new tab)</span>
         </a>
       </li>
       <li aria-hidden="true" class="hidden sm:block text-neutral-400 dark:text-neutral-600">·</li>

@@ -75,8 +75,8 @@
           <span class="eyebrow">Thoughts & Ideas</span>
           <h1 class="heading-primary">Blog</h1>
           <p class="text-body mt-4 max-w-2xl">
-            Writing about software development, technology, and lessons learned
-            along the way.
+            Long-form posts on machine learning and LLMs in Ruby and TypeScript,
+            with code you can run.
           </p>
         </header>
       {/if}

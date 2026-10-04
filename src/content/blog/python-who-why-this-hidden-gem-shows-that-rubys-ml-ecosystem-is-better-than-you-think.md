@@ -1,7 +1,7 @@
 ---
 title: "Python Who? Why This Hidden Gem Shows That Ruby's ML Ecosystem Is Better Than You Think"
 date: "2026/05/26"
-description: ""
+description: "You don't need Python for machine learning. A practical tour of Rumale, Ruby's ML gem, with a lead-scoring example you can run."
 tags: ["ruby", "machine learning"]
 ---
 

@@ -12,6 +12,8 @@
     stack: string[];
     image: string;
     link: string;
+    // Label for the primary link to the live product, gem page, or demo.
+    linkLabel: string;
     // Omitted for closed-source products; the card links to the live site instead.
     repository?: string;
   }
@@ -25,6 +27,7 @@
       stack: ["Ruby on Rails", "Hotwire"],
       image: mineAtelierPreview,
       link: "https://mineatelier.com/",
+      linkLabel: "Visit MineAtelier",
     },
     {
       title: "Notificare",
@@ -34,6 +37,7 @@
       stack: ["Ruby", "Ruby on Rails"],
       image: notificare,
       link: "https://rubygems.org/gems/notificare",
+      linkLabel: "View on RubyGems",
       repository: "https://github.com/joaoGabriel55/notificare",
     },
     {
@@ -43,6 +47,7 @@
       stack: ["Node.js", "Express", "WebSockets", "SQLite"],
       image: pokerEstimaPreview,
       link: "https://poker-estima-app.fly.dev/",
+      linkLabel: "Try the live app",
       repository: "https://github.com/joaoGabriel55/NostraEstima",
     },
     {
@@ -52,6 +57,7 @@
       stack: ["HTML", "CSS", "JavaScript"],
       image: theInvoicePreview,
       link: "https://the-invoice.netlify.app/",
+      linkLabel: "Try the live app",
       repository: "https://github.com/joaoGabriel55/invoice-generator",
     },
   ];
@@ -65,11 +71,14 @@
     <header class="mb-16 md:mb-20">
       <span class="eyebrow">Selected Work</span>
       <h2 class="heading-primary">Projects</h2>
+      <p class="text-body mt-4 max-w-2xl">
+        Things I've built and shipped, from a SaaS to a Rails gem.
+      </p>
     </header>
 
     <!-- Projects Grid -->
     <div class="space-y-20">
-      {#each projects as { title, kind, description, stack, image, link, repository }, index (title)}
+      {#each projects as { title, kind, description, stack, image, link, linkLabel, repository }, index (title)}
         <article class="group">
           <div class="grid md:grid-cols-2 gap-8 md:gap-12 items-center">
             <!-- Image -->
@@ -137,35 +146,47 @@
                 {/each}
               </ul>
 
-              <a
-                href={repository ?? link}
-                target="_blank"
-                rel="noopener noreferrer"
-                class="hit-area inline-flex items-center gap-3 text-sm text-neutral-600 hover:text-neutral-900 dark:text-neutral-400 dark:hover:text-white transition-colors duration-300 group/link"
-              >
-                <span
-                  class="w-8 h-px bg-neutral-400 dark:bg-neutral-700 group-hover/link:w-12 group-hover/link:bg-neutral-900 dark:group-hover/link:bg-white transition-all duration-300"
-                ></span>
-                {#if repository}
-                  View Source Code<span class="sr-only"> for {title}</span>
-                {:else}
-                  Visit {title}
-                {/if}
-                <svg
-                  class="w-4 h-4 transform motion-safe:group-hover/link:translate-x-1 transition-transform duration-300"
-                  fill="none"
-                  stroke="currentColor"
-                  viewBox="0 0 24 24"
-                  aria-hidden="true"
+              <!-- Live product first: visitors try apps far more often than they read repos. -->
+              <div class="flex flex-wrap gap-x-8 gap-y-2">
+                <a
+                  href={link}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  class="hit-area inline-flex items-center gap-3 text-sm text-neutral-800 hover:text-neutral-900 dark:text-neutral-200 dark:hover:text-white transition-colors duration-300 group/link"
                 >
-                  <path
-                    stroke-linecap="round"
-                    stroke-linejoin="round"
-                    stroke-width="1.5"
-                    d="M17 8l4 4m0 0l-4 4m4-4H3"
-                  />
-                </svg>
-              </a>
+                  <span
+                    class="w-8 h-px bg-neutral-500 dark:bg-neutral-500 group-hover/link:w-12 group-hover/link:bg-neutral-900 dark:group-hover/link:bg-white transition-all duration-300"
+                  ></span>
+                  {linkLabel}<span class="sr-only"> ({title})</span>
+                  <svg
+                    class="w-4 h-4 transform motion-safe:group-hover/link:translate-x-1 transition-transform duration-300"
+                    fill="none"
+                    stroke="currentColor"
+                    viewBox="0 0 24 24"
+                    aria-hidden="true"
+                  >
+                    <path
+                      stroke-linecap="round"
+                      stroke-linejoin="round"
+                      stroke-width="1.5"
+                      d="M17 8l4 4m0 0l-4 4m4-4H3"
+                    />
+                  </svg>
+                </a>
+                {#if repository}
+                  <a
+                    href={repository}
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    class="hit-area inline-flex items-center gap-3 text-sm text-neutral-600 hover:text-neutral-900 dark:text-neutral-400 dark:hover:text-white transition-colors duration-300 group/link"
+                  >
+                    <span
+                      class="w-8 h-px bg-neutral-400 dark:bg-neutral-700 group-hover/link:w-12 group-hover/link:bg-neutral-900 dark:group-hover/link:bg-white transition-all duration-300"
+                    ></span>
+                    Source<span class="sr-only"> code for {title}</span>
+                  </a>
+                {/if}
+              </div>
             </div>
           </div>
         </article>

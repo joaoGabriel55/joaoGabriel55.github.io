@@ -67,14 +67,18 @@
 
 <script lang="ts">
   import { onMount } from "svelte";
-  import { mergedPRsUrl } from "../../lib/openSource";
+  import { mergedPRsUrl, TOTAL_MERGED_PRS } from "../../lib/openSource";
 
-  const repositories = CONTRIBUTIONS.map(({ fullName, mergedPRs }) => {
+  // Biggest contribution first.
+  const repositories = [...CONTRIBUTIONS]
+    .sort((a, b) => b.mergedPRs - a.mergedPRs)
+    .map(({ fullName, mergedPRs, highlight }) => {
     const [owner, name] = fullName.split("/");
     return {
       fullName,
       name,
       mergedPRs,
+      highlight,
       avatar: `https://github.com/${owner}.png?size=80`,
       contributionsUrl: mergedPRsUrl(fullName),
     };
@@ -102,65 +106,55 @@
       <span class="eyebrow">Community</span>
       <h2 class="heading-primary">Open Source Contributions</h2>
       <p class="text-body mt-4 max-w-2xl">
-        Contributing to projects that make a difference in the developer
-        ecosystem.
+        {TOTAL_MERGED_PRS} merged pull requests across Forem, Grommet, Rails, axios, and Herb.
       </p>
     </header>
 
-    <!-- Repository Grid -->
-    <ul class="grid md:grid-cols-3 gap-6">
-      {#each repositories as { fullName, name, mergedPRs, avatar, contributionsUrl } (fullName)}
+    <!-- One ruled row per repo: who, one real contribution, and the full list. -->
+    <ul class="border-t border-neutral-200 dark:border-neutral-800">
+      {#each repositories as { fullName, name, mergedPRs, highlight, avatar, contributionsUrl } (fullName)}
         <li
-          class="group p-6 rounded-lg border border-neutral-200 dark:border-neutral-800 bg-neutral-50 dark:bg-surface-light hover:border-neutral-300 dark:hover:border-neutral-700 hover:bg-neutral-100 dark:hover:bg-surface-lighter transition-all duration-300"
+          class="group grid gap-3 py-6 border-b border-neutral-200 dark:border-neutral-800 md:grid-cols-[12rem_minmax(0,1fr)_auto] md:items-center md:gap-8"
         >
-          <!-- Header -->
-          <div class="flex items-center justify-between gap-4 mb-4">
-            <div class="flex items-center gap-3 min-w-0">
-              <img
-                src={avatar}
-                alt=""
-                width="40"
-                height="40"
-                loading="lazy"
-                decoding="async"
-                class="w-10 h-10 rounded-full bg-neutral-200 dark:bg-neutral-800 grayscale group-hover:grayscale-0 transition-all duration-500"
-              />
-              <h3
-                class="font-medium truncate text-neutral-800 dark:text-neutral-200 group-hover:text-neutral-900 dark:group-hover:text-white transition-colors duration-300"
-              >
-                {name}
-              </h3>
+          <!-- Repo -->
+          <div class="flex items-center gap-3 min-w-0">
+            <img
+              src={avatar}
+              alt=""
+              width="32"
+              height="32"
+              loading="lazy"
+              decoding="async"
+              class="w-8 h-8 rounded-full bg-neutral-200 dark:bg-neutral-800 grayscale group-hover:grayscale-0 [@media(hover:none)]:grayscale-0 transition-all duration-500"
+            />
+            <div class="min-w-0">
+              <h3 class="font-medium truncate text-neutral-900 dark:text-white">{name}</h3>
+              {#if stars[fullName] !== undefined}
+                <p class="text-xs text-meta tabular-nums">
+                  {formatStarNumber(stars[fullName])} repo stars
+                </p>
+              {/if}
             </div>
-            {#if stars[fullName] !== undefined}
-              <div class="flex items-center gap-1.5 text-meta shrink-0" title="Repository stars">
-                <svg class="w-4 h-4" fill="currentColor" viewBox="0 0 20 20" aria-hidden="true">
-                  <path
-                    d="M9.049 2.927c.3-.921 1.603-.921 1.902 0l1.07 3.292a1 1 0 00.95.69h3.462c.969 0 1.371 1.24.588 1.81l-2.8 2.034a1 1 0 00-.364 1.118l1.07 3.292c.3.921-.755 1.688-1.54 1.118l-2.8-2.034a1 1 0 00-1.175 0l-2.8 2.034c-.784.57-1.838-.197-1.539-1.118l1.07-3.292a1 1 0 00-.364-1.118L2.98 8.72c-.783-.57-.38-1.81.588-1.81h3.461a1 1 0 00.951-.69l1.07-3.292z"
-                  />
-                </svg>
-                <span class="text-sm tabular-nums">
-                  {formatStarNumber(stars[fullName])}
-                  <span class="sr-only">repository stars</span>
-                </span>
-              </div>
-            {/if}
           </div>
 
-          <p class="mb-4 text-sm text-neutral-700 dark:text-neutral-300">
-            {mergedPRs} merged pull requests
-          </p>
+          <!-- One representative merged PR -->
+          <a
+            href={highlight.url}
+            target="_blank"
+            rel="noopener noreferrer"
+            class="text-base font-light text-neutral-700 dark:text-neutral-300 hover:text-neutral-900 dark:hover:text-white transition-colors duration-300"
+          >
+            <span class="border-b border-neutral-300 dark:border-neutral-700 hover:border-current transition-colors duration-300">{highlight.title}</span>
+          </a>
 
-          <!-- Link -->
+          <!-- All merged PRs -->
           <a
             href={contributionsUrl}
             target="_blank"
             rel="noopener noreferrer"
-            class="hit-area inline-flex items-center gap-2 text-sm text-neutral-600 dark:text-neutral-400 hover:text-neutral-900 dark:hover:text-white transition-colors duration-300 group/link"
+            class="hit-area inline-flex items-center gap-2 text-sm text-neutral-600 dark:text-neutral-400 hover:text-neutral-900 dark:hover:text-white transition-colors duration-300 group/link whitespace-nowrap"
           >
-            <span
-              class="w-6 h-px bg-neutral-400 dark:bg-neutral-700 group-hover/link:w-10 group-hover/link:bg-neutral-900 dark:group-hover/link:bg-white transition-all duration-300"
-            ></span>
-            View my contributions<span class="sr-only"> to {name}</span>
+            {mergedPRs} merged PRs<span class="sr-only"> to {name}</span>
             <svg
               class="w-3.5 h-3.5 transform motion-safe:group-hover/link:translate-x-1 transition-transform duration-300"
               fill="none"

@@ -1,7 +1,7 @@
 ---
 title: "Why a 1990s Machine Learning Algorithm Destroys LLMs at Predicting House Prices"
 date: "2026/03/13"
-description: ""
+description: "I benchmarked a Random Forest trained in Ruby against an LLM at predicting house prices, across accuracy, latency and cost, and consistency, then combined the two in a hybrid."
 tags: ["llm", "machine learning", "ruby", "benchmark", "random forest"]
 ---
 
