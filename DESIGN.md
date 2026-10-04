@@ -259,6 +259,9 @@ Project previews sit in a 16:9 frame with 8px rounding. At rest the image is gra
 ### Code Blocks
 Rendered from fenced markdown with highlight.js, registering only the languages the blog uses (Ruby, TypeScript, JavaScript, Bash, SQL, JSON, YAML). A labelled block shows its language name as a tiny uppercase tracked label (eyebrow treatment, Pencil) that stays pinned while the block scrolls sideways. Unlabelled fences (prompts, terminal output) stay plain and unlabelled. Token colors come from the Code Tokens set.
 
+### Talk Player (signature)
+The Talks section on Home. The newest talk fills the container as a 16:9 frame with 8px rounding and a hairline border. Its YouTube poster rests in grayscale at 80% opacity under a paper-tinted veil and turns to color on hover or focus (The Develop-on-Touch Rule). A dark translucent pill in the bottom-left corner holds a 1px-ringed play glyph and "Play · N min". It stays in a corner so it never covers text printed on the poster. Pressing it swaps the poster for a `youtube-nocookie.com` embed that autoplays and takes focus, so nothing from YouTube loads before then except the poster image. Below the frame go a meta line (event · city · duration), the title, a summary, and Dash Links to the companion post and YouTube. Extra talks appear as hairline-ruled rows (small grayscale thumbnail, meta, title) that load into the same player. There is never more than one player on the page.
+
 ### Article Prose
 Long-form posts use light body type in Graphite (`#404040` light / Smudge dark) and light headings in Ink. Links get a 1px Chalk underline that darkens to Ink on hover. Code blocks have 8px rounding with a Bond Lifted fill and a Hairline border. Tables are fully ruled with 1px hairlines.
 

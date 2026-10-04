@@ -41,7 +41,7 @@ He is also a person, not just a CV. Brazilian Jiu-Jitsu, Football Manager, and d
 - **Stack:** Svelte 4, Vite, Tailwind 3, TypeScript, `svelte-spa-router`. Blog posts are markdown files in `src/content/blog/` with front matter (title, date, description, tags), rendered with `marked`.
 - **Open-source section:** fetches live repo metadata from the public GitHub API with a one-hour in-memory cache. Unauthenticated rate limits apply, so the section needs a graceful fallback.
 - **Themes:** light and dark both stay supported. The site respects `prefers-color-scheme` and also offers a manual toggle that is saved to localStorage.
-- **Talks:** a place for conference talks will be added. *Open:* the talk content (titles, events, dates, slides, video) is not in the repo yet and must come from Gabriel.
+- **Talks:** a section on Home, with data in `src/lib/talks.ts`. Talks are video-first (YouTube) and in English. The section is designed to look complete with a single talk and to grow from there.
 - **Language:** all current content is in English. No commitment was made either way.
 
 ## Brand Commitments
@@ -62,7 +62,8 @@ He is also a person, not just a CV. Brazilian Jiu-Jitsu, Football Manager, and d
   - LLMs + MCPs for database queries (2026-02)
   - Random Forest vs LLM for house prices (2026-03)
   - Rumale and Ruby's ML ecosystem (2026-05)
-- **Absent:** testimonials, talk details, a drawing portfolio, metrics such as stars, downloads, or readership. Future work must not invent any of these.
+- **Talks:** RubyConf 2026 (Las Vegas), "Why a 1990s Machine Learning Algorithm Destroys LLMs at Predicting House Prices", 21 minutes, published by Ruby Central on YouTube (`xIDJnAXadmQ`). It is the companion to the Random Forest blog post. The conference day isn't published, so only the year is shown.
+- **Absent:** testimonials, slides for talks, a drawing portfolio, metrics such as stars, downloads, or readership. Future work must not invent any of these.
 
 ## Product Principles
 
