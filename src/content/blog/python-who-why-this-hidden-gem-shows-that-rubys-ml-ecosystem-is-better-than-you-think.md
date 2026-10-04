@@ -1,5 +1,5 @@
 ---
-title: Python Who? Why This Hidden Gem Shows That Ruby's ML Ecosystem Is Better Than You Think"
+title: "Python Who? Why This Hidden Gem Shows That Ruby's ML Ecosystem Is Better Than You Think"
 date: "2026/05/26"
 description: ""
 tags: ["ruby", "machine learning"]

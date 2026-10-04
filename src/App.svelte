@@ -22,17 +22,3 @@
 </main>
 
 <Footer />
-
-<style lang="postcss">
-  :global(html) {
-    background-color: #ffffff;
-  }
-
-  :global(html.dark) {
-    background-color: #0a0a0a;
-  }
-
-  :global(body) {
-    overflow-x: hidden;
-  }
-</style>

@@ -1,71 +1,99 @@
-<script lang="ts" type="module">
+<script lang="ts" context="module">
+  // Repos are listed statically so the section always renders; the GitHub API
+  // only adds star counts. Counts are cached across mounts and page reloads
+  // to stay well under the unauthenticated rate limit (60 requests/hour/IP).
+  const REPOSITORIES = [
+    "rails/rails",
+    "axios/axios",
+    "grommet/grommet",
+    "forem/forem",
+    "marcoroth/herb",
+  ];
+
+  const GITHUB_USER = "joaoGabriel55";
+  const CACHE_KEY = "oss-stars";
+  const CACHE_TTL_MS = 60 * 60 * 1000; // 1 hour
+
+  type StarCache = { stars: Record<string, number>; expiresAt: number };
+
+  let memoryCache: StarCache | null = null;
+
+  function readCache(): StarCache | null {
+    if (memoryCache && Date.now() < memoryCache.expiresAt) return memoryCache;
+    try {
+      const raw = localStorage.getItem(CACHE_KEY);
+      if (!raw) return null;
+      const parsed = JSON.parse(raw) as StarCache;
+      if (Date.now() < parsed.expiresAt) {
+        memoryCache = parsed;
+        return parsed;
+      }
+    } catch {
+      // Storage blocked or corrupt: fall through to a fresh fetch.
+    }
+    return null;
+  }
+
+  function writeCache(stars: Record<string, number>) {
+    memoryCache = { stars, expiresAt: Date.now() + CACHE_TTL_MS };
+    try {
+      localStorage.setItem(CACHE_KEY, JSON.stringify(memoryCache));
+    } catch {
+      // Non-essential; the in-memory copy still covers this session.
+    }
+  }
+
+  async function fetchStars(fullName: string): Promise<number | null> {
+    try {
+      const response = await fetch(`https://api.github.com/repos/${fullName}`);
+      if (!response.ok) return null;
+      const data = (await response.json()) as { stargazers_count?: number };
+      return typeof data.stargazers_count === "number" ? data.stargazers_count : null;
+    } catch {
+      return null;
+    }
+  }
+
+  async function loadStars(): Promise<Record<string, number>> {
+    const cached = readCache();
+    if (cached) return cached.stars;
+
+    const results = await Promise.all(REPOSITORIES.map(fetchStars));
+    const stars: Record<string, number> = {};
+    results.forEach((count, i) => {
+      if (count !== null) stars[REPOSITORIES[i]] = count;
+    });
+
+    // Only cache a complete answer, so a rate-limited run retries next visit.
+    if (Object.keys(stars).length === REPOSITORIES.length) writeCache(stars);
+    return stars;
+  }
+</script>
+
+<script lang="ts">
   import { onMount } from "svelte";
 
-  let repositories: Array<{
-    icon: string;
-    name: string;
-    stars: number;
-    url: string;
-    description: string;
-  }> = [];
+  const repositories = REPOSITORIES.map((fullName) => {
+    const [owner, name] = fullName.split("/");
+    return {
+      fullName,
+      name,
+      avatar: `https://github.com/${owner}.png?size=80`,
+      contributionsUrl: `https://github.com/${fullName}/pulls?q=is%3Apr+author%3A${GITHUB_USER}+is%3Aclosed`,
+    };
+  });
 
-  let loading = true;
+  let stars: Record<string, number> = readCache()?.stars ?? {};
 
-  interface GithubRepo {
-    name: string;
-    description: string | null;
-    html_url: string;
-    stargazers_count: number;
-    owner: { avatar_url: string };
-  }
-
-  const CACHE_TTL_MS = 60 * 60 * 1000; // 1 hour
-  const repoCache = new Map<string, { data: GithubRepo; expiresAt: number }>();
-
-  async function fetchRepository(url: string) {
-    const cached = repoCache.get(url);
-    if (cached && Date.now() < cached.expiresAt) return cached.data;
-
-    const response = await fetch(`https://api.github.com/repos/${url}`);
-    const data = await response.json() as GithubRepo;
-    repoCache.set(url, { data, expiresAt: Date.now() + CACHE_TTL_MS });
-    return data;
-  }
-
-  async function fetchRepositories() {
-    const response = await Promise.all([
-      fetchRepository("rails/rails"),
-      fetchRepository("axios/axios"),
-      fetchRepository("grommet/grommet"),
-      fetchRepository("forem/forem"),
-    ]);
-
-    return response.map((repo) => ({
-      icon: repo.owner.avatar_url,
-      name: repo.name,
-      stars: repo.stargazers_count,
-      url: repo.html_url,
-      description: repo.description || "",
-    }));
-  }
-
-  function formatStarNumber(stars: number) {
-    if (stars >= 1000000) {
-      return `${(stars / 1000000).toFixed(1)}M`;
-    } else if (stars >= 1000) {
-      return `${(stars / 1000).toFixed(1)}K`;
-    }
-    return stars.toString();
-  }
-
-  function formatMyPRsUrl(url: string) {
-    return `${url}/pulls?q=is%3Apr+author%3AjoaoGabriel55+is%3Aclosed`;
+  function formatStarNumber(count: number) {
+    if (count >= 1000000) return `${(count / 1000000).toFixed(1)}M`;
+    if (count >= 1000) return `${(count / 1000).toFixed(1)}K`;
+    return count.toString();
   }
 
   onMount(() => {
-    fetchRepositories().then((data) => {
-      repositories = data;
-      loading = false;
+    loadStars().then((result) => {
+      stars = result;
     });
   });
 </script>
@@ -74,11 +102,7 @@
   <div class="section-container">
     <!-- Section Header -->
     <header class="mb-16 md:mb-20">
-      <span
-        class="text-xs uppercase tracking-widest text-neutral-500 dark:text-neutral-600 mb-4 block"
-      >
-        Community
-      </span>
+      <span class="eyebrow">Community</span>
       <h2 class="heading-primary">Open Source Contributions</h2>
       <p class="text-body mt-4 max-w-2xl">
         Contributing to projects that make a difference in the developer
@@ -87,79 +111,72 @@
     </header>
 
     <!-- Repository Grid -->
-    {#if loading}
-      <div class="grid md:grid-cols-3 gap-6">
-        {#each [1, 2, 3] as _}
-          <div
-            class="p-6 rounded-lg border border-neutral-200 dark:border-neutral-800 bg-neutral-50 dark:bg-surface-light animate-pulse"
-          >
-            <div class="flex items-center gap-4 mb-4">
-              <div class="w-10 h-10 rounded-full bg-neutral-200 dark:bg-neutral-800"></div>
-              <div class="h-5 w-24 bg-neutral-200 dark:bg-neutral-800 rounded"></div>
+    <ul class="grid md:grid-cols-3 gap-6">
+      {#each repositories as { fullName, name, avatar, contributionsUrl } (fullName)}
+        <li
+          class="group p-6 rounded-lg border border-neutral-200 dark:border-neutral-800 bg-neutral-50 dark:bg-surface-light hover:border-neutral-300 dark:hover:border-neutral-700 hover:bg-neutral-100 dark:hover:bg-surface-lighter transition-all duration-300"
+        >
+          <!-- Header -->
+          <div class="flex items-center justify-between gap-4 mb-5">
+            <div class="flex items-center gap-3 min-w-0">
+              <img
+                src={avatar}
+                alt=""
+                width="40"
+                height="40"
+                loading="lazy"
+                decoding="async"
+                class="w-10 h-10 rounded-full bg-neutral-200 dark:bg-neutral-800 grayscale group-hover:grayscale-0 transition-all duration-500"
+              />
+              <h3
+                class="font-medium truncate text-neutral-800 dark:text-neutral-200 group-hover:text-neutral-900 dark:group-hover:text-white transition-colors duration-300"
+              >
+                {name}
+              </h3>
             </div>
-            <div class="h-4 w-full bg-neutral-200 dark:bg-neutral-800 rounded mb-2"></div>
-            <div class="h-4 w-2/3 bg-neutral-200 dark:bg-neutral-800 rounded"></div>
-          </div>
-        {/each}
-      </div>
-    {:else}
-      <div class="grid md:grid-cols-3 gap-6">
-        {#each repositories as { name, icon, stars, url }}
-          <article
-            class="group p-6 rounded-lg border border-neutral-200 dark:border-neutral-800 bg-neutral-50 dark:bg-surface-light hover:border-neutral-300 dark:hover:border-neutral-700 hover:bg-neutral-100 dark:hover:bg-surface-lighter transition-all duration-300"
-          >
-            <!-- Header -->
-            <div class="flex items-center justify-between mb-5">
-              <div class="flex items-center gap-3">
-                <img
-                  src={icon}
-                  alt={name}
-                  class="w-10 h-10 rounded-full grayscale group-hover:grayscale-0 transition-all duration-500"
-                />
-                <h3
-                  class="font-medium text-neutral-800 dark:text-neutral-200 group-hover:text-neutral-900 dark:group-hover:text-white transition-colors duration-300"
-                >
-                  {name}
-                </h3>
-              </div>
-              <div class="flex items-center gap-1.5 text-neutral-500">
-                <svg class="w-4 h-4" fill="currentColor" viewBox="0 0 20 20">
+            {#if stars[fullName] !== undefined}
+              <div class="flex items-center gap-1.5 text-meta shrink-0">
+                <svg class="w-4 h-4" fill="currentColor" viewBox="0 0 20 20" aria-hidden="true">
                   <path
                     d="M9.049 2.927c.3-.921 1.603-.921 1.902 0l1.07 3.292a1 1 0 00.95.69h3.462c.969 0 1.371 1.24.588 1.81l-2.8 2.034a1 1 0 00-.364 1.118l1.07 3.292c.3.921-.755 1.688-1.54 1.118l-2.8-2.034a1 1 0 00-1.175 0l-2.8 2.034c-.784.57-1.838-.197-1.539-1.118l1.07-3.292a1 1 0 00-.364-1.118L2.98 8.72c-.783-.57-.38-1.81.588-1.81h3.461a1 1 0 00.951-.69l1.07-3.292z"
                   />
                 </svg>
-                <span class="text-sm">{formatStarNumber(stars)}</span>
+                <span class="text-sm tabular-nums">
+                  {formatStarNumber(stars[fullName])}
+                  <span class="sr-only">stars</span>
+                </span>
               </div>
-            </div>
+            {/if}
+          </div>
 
-            <!-- Link -->
-            <a
-              href={formatMyPRsUrl(url)}
-              target="_blank"
-              rel="noopener noreferrer"
-              class="inline-flex items-center gap-2 text-sm text-neutral-600 dark:text-neutral-500 hover:text-neutral-900 dark:hover:text-white transition-colors duration-300 group/link"
+          <!-- Link -->
+          <a
+            href={contributionsUrl}
+            target="_blank"
+            rel="noopener noreferrer"
+            class="hit-area inline-flex items-center gap-2 text-sm text-neutral-600 dark:text-neutral-400 hover:text-neutral-900 dark:hover:text-white transition-colors duration-300 group/link"
+          >
+            <span
+              class="w-6 h-px bg-neutral-400 dark:bg-neutral-700 group-hover/link:w-10 group-hover/link:bg-neutral-900 dark:group-hover/link:bg-white transition-all duration-300"
+            ></span>
+            View my contributions<span class="sr-only"> to {name}</span>
+            <svg
+              class="w-3.5 h-3.5 transform motion-safe:group-hover/link:translate-x-1 transition-transform duration-300"
+              fill="none"
+              stroke="currentColor"
+              viewBox="0 0 24 24"
+              aria-hidden="true"
             >
-              <span
-                class="w-6 h-px bg-neutral-400 dark:bg-neutral-700 group-hover/link:w-10 group-hover/link:bg-neutral-900 dark:group-hover/link:bg-white transition-all duration-300"
-              ></span>
-              View my contributions
-              <svg
-                class="w-3.5 h-3.5 transform group-hover/link:translate-x-1 transition-transform duration-300"
-                fill="none"
-                stroke="currentColor"
-                viewBox="0 0 24 24"
-              >
-                <path
-                  stroke-linecap="round"
-                  stroke-linejoin="round"
-                  stroke-width="1.5"
-                  d="M17 8l4 4m0 0l-4 4m4-4H3"
-                />
-              </svg>
-            </a>
-          </article>
-        {/each}
-      </div>
-    {/if}
+              <path
+                stroke-linecap="round"
+                stroke-linejoin="round"
+                stroke-width="1.5"
+                d="M17 8l4 4m0 0l-4 4m4-4H3"
+              />
+            </svg>
+          </a>
+        </li>
+      {/each}
+    </ul>
   </div>
 </section>

@@ -6,19 +6,16 @@
   const socialNetworks = [
     {
       icon: githubIcon,
-      alt: "GitHub",
       link: "https://github.com/joaoGabriel55",
       label: "GitHub",
     },
     {
       icon: linkedinIcon,
-      alt: "LinkedIn",
       link: "https://linkedin.com/in/gabriel-quaresma-dev",
       label: "LinkedIn",
     },
     {
       icon: instagramIcon,
-      alt: "Instagram",
       link: "https://instagram.com/drawquaresma",
       label: "Instagram",
     },
@@ -27,7 +24,7 @@
 
 <nav aria-label="Social networks">
   <ul class="flex items-center justify-center gap-8">
-    {#each socialNetworks as { icon, alt, link, label }, index}
+    {#each socialNetworks as { icon, link, label }, index}
       <li>
         <a
           href={link}
@@ -38,7 +35,9 @@
         >
           <img
             src={icon}
-            {alt}
+            alt=""
+            width="20"
+            height="20"
             class={"w-5 h-5 opacity-60 group-hover:opacity-100 transition-opacity duration-300 dark:invert-0" +
               (index === 0 ? " invert" : "")}
           />

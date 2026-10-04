@@ -1,13 +1,11 @@
 <script lang="ts">
-  import { link, push } from "svelte-spa-router";
-  import { viewingPost, closePost } from "../../lib/stores/blogStore";
+  import { link, location } from "svelte-spa-router";
   import { theme } from "../../lib/stores/themeStore";
+  import { scrollToTop } from "../../lib/route";
 
-  function goHome() {
-    if ($viewingPost) {
-      closePost();
-    }
-    push("/");
+  // Already on the home page: the link would be a no-op, so return to the top.
+  function onHomeClick() {
+    if ($location === "/") scrollToTop();
   }
 </script>
 
@@ -17,19 +15,22 @@
   <nav class="section-container py-4">
     <div class="flex items-center justify-between">
       <!-- Logo / Home Link -->
-      <button
-        on:click={goHome}
-        class="text-sm md:text-base font-light tracking-wide text-neutral-700 hover:text-neutral-900 dark:text-neutral-300 dark:hover:text-white transition-colors duration-300"
+      <a
+        href="/"
+        use:link
+        on:click={onHomeClick}
+        class="hit-area text-sm md:text-base font-light tracking-wide text-neutral-700 hover:text-neutral-900 dark:text-neutral-300 dark:hover:text-white transition-colors duration-300"
       >
         Gabriel Quaresma
-      </button>
+      </a>
 
       <!-- Navigation Links -->
       <div class="flex items-center gap-6 md:gap-8">
         <a
           href="/blog"
           use:link
-          class="text-sm font-light tracking-wide text-neutral-500 hover:text-neutral-900 dark:hover:text-white transition-colors duration-300"
+          aria-current={$location.startsWith("/blog") ? "page" : undefined}
+          class="hit-area text-sm font-light tracking-wide text-pencil hover:text-neutral-900 dark:text-pencil-dark dark:hover:text-white aria-[current=page]:text-neutral-900 dark:aria-[current=page]:text-white transition-colors duration-300"
         >
           Blog
         </a>
@@ -38,14 +39,15 @@
         <button
           type="button"
           on:click={theme.toggle}
-          aria-label="Toggle theme"
+          aria-label={$theme === "dark" ? "Switch to light theme" : "Switch to dark theme"}
           title={$theme === "dark" ? "Switch to light theme" : "Switch to dark theme"}
-          class="flex items-center justify-center w-9 h-9 rounded-full border border-neutral-200 dark:border-neutral-800 text-neutral-600 dark:text-neutral-400 hover:text-neutral-900 dark:hover:text-white hover:border-neutral-400 dark:hover:border-neutral-600 transition-all duration-300"
+          class="relative before:absolute before:-inset-1 before:content-[''] flex items-center justify-center w-9 h-9 rounded-full border border-neutral-200 dark:border-neutral-800 text-neutral-600 dark:text-neutral-400 hover:text-neutral-900 dark:hover:text-white hover:border-neutral-400 dark:hover:border-neutral-600 transition-all duration-300"
         >
           {#if $theme === "dark"}
             <!-- Sun icon -->
             <svg
               class="w-4 h-4"
+              aria-hidden="true"
               fill="none"
               stroke="currentColor"
               viewBox="0 0 24 24"
@@ -61,6 +63,7 @@
             <!-- Moon icon -->
             <svg
               class="w-4 h-4"
+              aria-hidden="true"
               fill="none"
               stroke="currentColor"
               viewBox="0 0 24 24"

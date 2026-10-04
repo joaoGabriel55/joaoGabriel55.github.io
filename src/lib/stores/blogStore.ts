@@ -1,5 +1,6 @@
 import { writable } from 'svelte/store';
 import type { BlogPost } from '../blog';
+import { scrollToTop } from '../route';
 
 // Store to track the currently selected blog post for viewing
 export const currentPost = writable<BlogPost | null>(null);
@@ -13,7 +14,7 @@ export function openPost(post: BlogPost): void {
   viewingPost.set(true);
 
   // Scroll to top when opening a post
-  window.scrollTo({ top: 0, behavior: 'smooth' });
+  scrollToTop();
 }
 
 // Function to close the current post and return to list

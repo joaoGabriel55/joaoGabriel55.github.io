@@ -1,4 +1,38 @@
-import { marked } from "marked";
+import { Marked } from "marked";
+import { markedHighlight } from "marked-highlight";
+import hljs from "highlight.js/lib/core";
+import bash from "highlight.js/lib/languages/bash";
+import javascript from "highlight.js/lib/languages/javascript";
+import json from "highlight.js/lib/languages/json";
+import plaintext from "highlight.js/lib/languages/plaintext";
+import ruby from "highlight.js/lib/languages/ruby";
+import sql from "highlight.js/lib/languages/sql";
+import typescript from "highlight.js/lib/languages/typescript";
+import yaml from "highlight.js/lib/languages/yaml";
+
+// Only the languages the blog uses, to keep the bundle small. Each grammar
+// brings its aliases (rb, ts, sh, js, yml, text). Add new ones here.
+hljs.registerLanguage("bash", bash);
+hljs.registerLanguage("javascript", javascript);
+hljs.registerLanguage("json", json);
+hljs.registerLanguage("plaintext", plaintext);
+hljs.registerLanguage("ruby", ruby);
+hljs.registerLanguage("sql", sql);
+hljs.registerLanguage("typescript", typescript);
+hljs.registerLanguage("yaml", yaml);
+
+// Unlabeled fences are prompts and terminal output in practice, so they stay
+// plain rather than being guessed at by auto-detection.
+const markdown = new Marked(
+  markedHighlight({
+    emptyLangClass: "hljs",
+    langPrefix: "hljs language-",
+    highlight(code, lang) {
+      const language = hljs.getLanguage(lang) ? lang : "plaintext";
+      return hljs.highlight(code, { language }).value;
+    },
+  })
+);
 
 export interface BlogPost {
   slug: string;
@@ -91,7 +125,16 @@ function parseMarkdownFile(filename: string, rawContent: string): BlogPost {
   const { data, content } = parseFrontMatter(rawContent);
 
   // Convert markdown to HTML
-  const htmlContent = marked(content) as string;
+  const htmlContent = (markdown.parse(content) as string)
+    // Post images sit below the fold; let the browser defer them.
+    .replace(/<img /g, '<img loading="lazy" decoding="async" ')
+    // Label each highlighted block with its language's display name.
+    .replace(/<pre><code class="hljs language-([\w-]+)">/g, (match, lang: string) => {
+      const name = hljs.getLanguage(lang)?.name;
+      return name && lang !== "plaintext" && lang !== "text"
+        ? `<pre data-lang="${name}">${match.slice(5)}`
+        : match;
+    });
 
   return {
     slug,
@@ -105,20 +148,21 @@ function parseMarkdownFile(filename: string, rawContent: string): BlogPost {
   };
 }
 
-export function getAllPosts(): BlogPost[] {
-  const posts = Object.entries(blogFiles).map(([filename, content]) => {
-    return parseMarkdownFile(filename, content as string);
-  });
+// Posts are bundled at build time, so parse and sort them once.
+let postsCache: BlogPost[] | null = null;
 
-  // Sort by date (newest first)
-  return posts.sort((a, b) => {
-    return new Date(b.date).getTime() - new Date(a.date).getTime();
-  });
+export function getAllPosts(): BlogPost[] {
+  if (!postsCache) {
+    postsCache = Object.entries(blogFiles)
+      .map(([filename, content]) => parseMarkdownFile(filename, content as string))
+      // Sort by date (newest first)
+      .sort((a, b) => new Date(b.date).getTime() - new Date(a.date).getTime());
+  }
+  return postsCache;
 }
 
 export function getPostBySlug(slug: string): BlogPost | undefined {
-  const posts = getAllPosts();
-  return posts.find((post) => post.slug === slug);
+  return getAllPosts().find((post) => post.slug === slug);
 }
 
 export function getAllPostsMeta(): BlogPostMeta[] {

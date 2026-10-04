@@ -1,5 +1,5 @@
 <script>
-  import profilePicture from "../../lib/assets/profile.png";
+  import profilePicture from "../../lib/assets/profile.webp";
   import MyName from "./+MyName.svelte";
   import Overview from "./+Overview.svelte";
   import SocialNetworks from "./+SocialNetworks.svelte";
@@ -17,7 +17,9 @@
         ></div>
         <img
           src={profilePicture}
-          alt="Gabriel Quaresma"
+          alt="Portrait of Gabriel Quaresma"
+          width="176"
+          height="176"
           class="relative w-36 h-36 md:w-44 md:h-44 rounded-full object-cover grayscale hover:grayscale-0 transition-all duration-700 ease-out ring-1 ring-neutral-300 dark:ring-neutral-800"
         />
       </div>
@@ -26,7 +28,7 @@
       <div class="space-y-4">
         <MyName />
         <p
-          class="text-neutral-600 dark:text-neutral-500 text-sm md:text-base font-light tracking-widest uppercase"
+          class="text-neutral-600 dark:text-neutral-400 text-sm md:text-base font-light tracking-widest uppercase"
         >
           Software Engineer @Codeminer42 · Brazil
         </p>
@@ -39,9 +41,9 @@
       <SocialNetworks />
     </div>
     <!-- Scroll Indicator -->
-    <div class="hidden md:block">
+    <div class="hidden md:block" aria-hidden="true">
       <div
-        class="w-px h-16 bg-gradient-to-b from-neutral-400 dark:from-neutral-600 to-transparent animate-pulse"
+        class="w-px h-16 bg-gradient-to-b from-neutral-400 dark:from-neutral-600 to-transparent motion-safe:animate-pulse"
       ></div>
     </div>
   </div>

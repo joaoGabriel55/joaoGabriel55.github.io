@@ -5,7 +5,16 @@ export default {
   theme: {
     extend: {
       fontFamily: {
-        sans: ["Inter", "system-ui", "sans-serif"],
+        sans: [
+          "system-ui",
+          "-apple-system",
+          "BlinkMacSystemFont",
+          '"Segoe UI"',
+          "Roboto",
+          '"Helvetica Neue"',
+          "Arial",
+          "sans-serif",
+        ],
       },
       colors: {
         surface: {
@@ -13,15 +22,10 @@ export default {
           light: "#141414",
           lighter: "#1a1a1a",
         },
-        "surface-soft": {
-          DEFAULT: "#ffffff",
-          light: "#f5f5f5",
-          lighter: "#e5e5e5",
-        },
-        accent: {
-          DEFAULT: "#e5e5e5",
-          muted: "#a3a3a3",
-          subtle: "#525252",
+        // Meta text (dates, labels, counts): AA on every page and card surface.
+        pencil: {
+          DEFAULT: "#6b6b6b",
+          dark: "#8a8a8a",
         },
       },
       spacing: {

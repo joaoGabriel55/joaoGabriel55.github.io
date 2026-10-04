@@ -1,34 +1,30 @@
 <script lang="ts">
   import type { BlogPost } from "../../lib/blog";
   import { formatDate, getReadingTime } from "../../lib/blog";
-  import { push } from "svelte-spa-router";
+  import { link } from "svelte-spa-router";
 
   export let post: BlogPost;
 
   $: readingTime = getReadingTime(post.content);
-
-  function goToPost() {
-    push(`/blog/${post.slug}`);
-  }
 </script>
 
-<button class="group cursor-pointer w-full text-left" on:click={goToPost}>
-  <div
-    class="p-6 md:p-8 bg-neutral-50 dark:bg-surface-light rounded-lg border border-neutral-200 dark:border-neutral-800 hover:border-neutral-300 dark:hover:border-neutral-700 transition-all duration-300 hover:bg-neutral-100 dark:hover:bg-surface-lighter"
+<a href="/blog/{post.slug}" use:link class="group block rounded-lg">
+  <article
+    class="h-full p-6 md:p-8 bg-neutral-50 dark:bg-surface-light rounded-lg border border-neutral-200 dark:border-neutral-800 hover:border-neutral-300 dark:hover:border-neutral-700 transition-all duration-300 hover:bg-neutral-100 dark:hover:bg-surface-lighter"
   >
     <!-- Date and Reading Time -->
     <div class="mb-6 space-y-2">
       <div class="flex items-center gap-4">
-        <time class="text-xs text-neutral-500 tracking-wide uppercase">
+        <time class="text-xs text-meta uppercase">
           {formatDate(post.date)}
         </time>
-        <span class="text-neutral-400 dark:text-neutral-700">·</span>
-        <span class="text-xs text-neutral-500 tracking-wide">
+        <span class="text-neutral-400 dark:text-neutral-700" aria-hidden="true">·</span>
+        <span class="text-xs text-meta">
           {readingTime} min read
         </span>
       </div>
       {#if post.updateDate}
-        <p class="text-xs italic text-neutral-500 tracking-wide">
+        <p class="text-xs italic text-meta">
           Updated at {formatDate(post.updateDate)}
         </p>
       {/if}
@@ -42,31 +38,36 @@
     </h3>
 
     <!-- Description -->
-    <p class="text-body text-sm mb-5 line-clamp-2">
-      {post.description}
-    </p>
+    {#if post.description}
+      <p class="text-body text-sm mb-5 line-clamp-2">
+        {post.description}
+      </p>
+    {/if}
 
     <!-- Tags -->
-    <div class="flex flex-wrap gap-2 mb-5">
-      {#each post.tags.slice(0, 3) as tag}
-        <span
-          class="px-2 py-1 text-xs tracking-wide text-neutral-600 dark:text-neutral-500 bg-neutral-200 dark:bg-neutral-900 rounded"
-        >
-          #{tag}
-        </span>
-      {/each}
-    </div>
+    {#if post.tags.length > 0}
+      <ul class="flex flex-wrap gap-2 mb-5" aria-label="Tags">
+        {#each post.tags.slice(0, 3) as tag}
+          <li
+            class="px-2 py-1 text-xs tracking-wide text-neutral-600 dark:text-pencil-dark bg-neutral-200 dark:bg-neutral-900 rounded"
+          >
+            #{tag}
+          </li>
+        {/each}
+      </ul>
+    {/if}
 
-    <!-- Read More Link -->
+    <!-- Read More Cue -->
     <div
       class="inline-flex items-center gap-3 text-sm text-neutral-600 dark:text-neutral-400 group-hover:text-neutral-900 dark:group-hover:text-white transition-colors duration-300"
+      aria-hidden="true"
     >
       <span
         class="w-6 h-px bg-neutral-400 dark:bg-neutral-700 group-hover:w-10 group-hover:bg-neutral-900 dark:group-hover:bg-white transition-all duration-300"
       ></span>
       Read Article
       <svg
-        class="w-4 h-4 transform group-hover:translate-x-1 transition-transform duration-300"
+        class="w-4 h-4 transform motion-safe:group-hover:translate-x-1 transition-transform duration-300"
         fill="none"
         stroke="currentColor"
         viewBox="0 0 24 24"
@@ -79,8 +80,8 @@
         />
       </svg>
     </div>
-  </div>
-</button>
+  </article>
+</a>
 
 <style>
   .line-clamp-2 {

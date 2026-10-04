@@ -1,26 +1,17 @@
 <script lang="ts">
-  import { onMount } from "svelte";
   import { getAllPosts, type BlogPost } from "../../lib/blog";
   import { link } from "svelte-spa-router";
   import BlogCard from "./+BlogCard.svelte";
 
-  let recentPosts: BlogPost[] = [];
-
-  onMount(() => {
-    // Get only the 2 most recent posts
-    recentPosts = getAllPosts().slice(0, 2);
-  });
+  // Only the 2 most recent posts
+  const recentPosts: BlogPost[] = getAllPosts().slice(0, 2);
 </script>
 
 <section class="py-24 md:py-32 border-t border-neutral-200 dark:border-neutral-900" id="blog">
   <div class="section-container">
     <!-- Section Header -->
     <header class="mb-16 md:mb-20">
-      <span
-        class="text-xs uppercase tracking-widest text-neutral-500 dark:text-neutral-600 mb-4 block"
-      >
-        Thoughts & Ideas
-      </span>
+      <span class="eyebrow">Thoughts & Ideas</span>
       <h2 class="heading-primary">Blog</h2>
       <p class="text-body mt-4 max-w-2xl">
         Writing about software development, technology, and lessons learned
@@ -31,7 +22,7 @@
     <!-- Recent Blog Posts (max 2) -->
     {#if recentPosts.length > 0}
       <div class="grid md:grid-cols-2 gap-6 md:gap-8">
-        {#each recentPosts as post}
+        {#each recentPosts as post (post.slug)}
           <BlogCard {post} />
         {/each}
       </div>
@@ -41,11 +32,12 @@
         <a
           href="/blog"
           use:link
-          class="inline-flex items-center gap-3 text-sm text-neutral-600 hover:text-neutral-900 dark:text-neutral-400 dark:hover:text-white transition-colors duration-300 group"
+          class="hit-area inline-flex items-center gap-3 text-sm text-neutral-600 hover:text-neutral-900 dark:text-neutral-400 dark:hover:text-white transition-colors duration-300 group"
         >
           View all posts
           <svg
-            class="w-4 h-4 transform group-hover:translate-x-1 transition-transform duration-300"
+            class="w-4 h-4 transform motion-safe:group-hover:translate-x-1 transition-transform duration-300"
+            aria-hidden="true"
             fill="none"
             stroke="currentColor"
             viewBox="0 0 24 24"
@@ -61,7 +53,7 @@
       </div>
     {:else}
       <div class="text-center py-16">
-        <p class="text-neutral-500">No blog posts yet. Check back soon!</p>
+        <p class="text-meta">No blog posts yet. Check back soon!</p>
       </div>
     {/if}
   </div>

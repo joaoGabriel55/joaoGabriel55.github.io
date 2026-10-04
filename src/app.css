@@ -3,23 +3,63 @@
 @tailwind utilities;
 
 @layer base {
+  /* DESIGN.md color roles, paired per theme. Tailwind utilities use the same
+     neutral scale; hand-written CSS (prose, page background) reads these. */
+  :root {
+    --page: #ffffff;
+    --ink: #171717;
+    --text-prose: #404040;
+    --text-quiet: #525252;
+    --underline: #a3a3a3;
+    --rule: #d4d4d4;
+    --line: #e5e5e5;
+    --code-bg: #f5f5f5;
+    --pre-bg: #f5f5f5;
+    --focus: #171717;
+
+    /* Code tokens: muted "colored pencil" hues, each ≥4.8:1 on --pre-bg. */
+    --code-text: #262626;
+    --code-keyword: #8b2f6b;
+    --code-string: #2f6b3a;
+    --code-number: #a14b12;
+    --code-title: #1f5f9e;
+    --code-type: #7a5300;
+    --code-symbol: #0f6b6b;
+    --code-comment: #6b6b6b;
+  }
+
+  :root.dark {
+    --page: #0a0a0a;
+    --ink: #ffffff;
+    --text-prose: #d4d4d4;
+    --text-quiet: #a3a3a3;
+    --underline: #525252;
+    --rule: #404040;
+    --line: #262626;
+    --code-bg: #262626;
+    --pre-bg: #171717;
+    --focus: #ffffff;
+
+    --code-text: #e5e5e5;
+    --code-keyword: #d49ac4;
+    --code-string: #9ccc8c;
+    --code-number: #e3a46c;
+    --code-title: #8fb8e6;
+    --code-type: #d9b86a;
+    --code-symbol: #7cc7c0;
+    --code-comment: #8a8a8a;
+  }
+
   html {
+    background-color: var(--page);
     scroll-behavior: smooth;
     -webkit-font-smoothing: antialiased;
     -moz-osx-font-smoothing: grayscale;
   }
 
   body {
-    @apply bg-white text-neutral-900 dark:bg-neutral-950 dark:text-neutral-100;
-    font-family:
-      system-ui,
-      -apple-system,
-      BlinkMacSystemFont,
-      "Segoe UI",
-      Roboto,
-      "Helvetica Neue",
-      Arial,
-      sans-serif;
+    @apply bg-white font-sans text-neutral-900 dark:bg-neutral-950 dark:text-neutral-100;
+    overflow-x: hidden;
     transition:
       background-color 0.3s ease,
       color 0.3s ease;
@@ -28,11 +68,32 @@
   ::selection {
     @apply bg-neutral-300 text-neutral-900 dark:bg-neutral-700 dark:text-white;
   }
+
+  :focus-visible {
+    outline: 1px solid var(--focus);
+    outline-offset: 4px;
+    border-radius: 2px;
+  }
+
+  /* Route headings receive programmatic focus after navigation; no ring. */
+  [tabindex="-1"]:focus {
+    outline: none;
+  }
+
+  @media (prefers-reduced-motion: reduce) {
+    html {
+      scroll-behavior: auto;
+    }
+  }
 }
 
 @layer components {
   .section-container {
     @apply max-w-5xl mx-auto px-6 md:px-12;
+  }
+
+  .eyebrow {
+    @apply text-xs uppercase tracking-widest text-pencil dark:text-pencil-dark mb-4 block;
   }
 
   .heading-primary {
@@ -47,11 +108,20 @@
     @apply text-base md:text-lg font-light leading-relaxed text-neutral-600 dark:text-neutral-400;
   }
 
+  .text-meta {
+    @apply text-pencil dark:text-pencil-dark tracking-wide;
+  }
+
   .link-subtle {
     @apply text-neutral-600 hover:text-neutral-900 dark:text-neutral-400 dark:hover:text-white transition-colors duration-300;
   }
 
   .link-accent {
     @apply text-neutral-700 hover:text-neutral-900 border-b border-neutral-400 hover:border-neutral-900 dark:text-neutral-300 dark:hover:text-white dark:border-neutral-600 dark:hover:border-white transition-all duration-300;
+  }
+
+  /* Text links get a 44px-tall hit area without changing layout. */
+  .hit-area {
+    @apply py-3 -my-3;
   }
 }

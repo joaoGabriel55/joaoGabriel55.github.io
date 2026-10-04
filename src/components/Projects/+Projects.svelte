@@ -1,6 +1,6 @@
 <script lang="ts">
-  import theInvoicePreview from "../../lib/assets/projects/the_invoice.jpeg";
-  import pokerEstimaPreview from "../../lib/assets/projects/poker_estima.jpeg";
+  import theInvoicePreview from "../../lib/assets/projects/the_invoice.webp";
+  import pokerEstimaPreview from "../../lib/assets/projects/poker_estima.webp";
   import notificare from "../../lib/assets/projects/notificare.svg";
 
   const projects = [
@@ -48,11 +48,7 @@
   <div class="section-container">
     <!-- Section Header -->
     <header class="mb-16 md:mb-20">
-      <span
-        class="text-xs uppercase tracking-widest text-neutral-500 dark:text-neutral-600 mb-4 block"
-      >
-        Selected Work
-      </span>
+      <span class="eyebrow">Selected Work</span>
       <h2 class="heading-primary">Projects</h2>
     </header>
 
@@ -63,10 +59,14 @@
           <div class="grid md:grid-cols-2 gap-8 md:gap-12 items-center">
             <!-- Image -->
             <div class="order-1 {index % 2 === 1 ? 'md:order-2' : ''}">
+              <!-- Duplicate of the title link for pointer users; hidden from
+                   keyboard and screen readers to avoid a redundant stop. -->
               <a
                 href={link}
                 target="_blank"
                 rel="noopener noreferrer"
+                tabindex="-1"
+                aria-hidden="true"
                 class="block overflow-hidden rounded-lg"
               >
                 <div
@@ -74,8 +74,10 @@
                 >
                   <img
                     src={image}
-                    alt={title}
-                    class="w-full h-full object-cover grayscale group-hover:grayscale-0 opacity-80 group-hover:opacity-100 scale-100 group-hover:scale-105 transition-all duration-700 ease-out"
+                    alt=""
+                    loading="lazy"
+                    decoding="async"
+                    class="w-full h-full object-cover grayscale group-hover:grayscale-0 opacity-80 group-hover:opacity-100 scale-100 motion-safe:group-hover:scale-105 transition-all duration-700 ease-out"
                   />
                   <div
                     class="absolute inset-0 bg-gradient-to-t from-white/50 dark:from-surface/50 to-transparent opacity-60 group-hover:opacity-0 transition-opacity duration-500"
@@ -107,38 +109,39 @@
               </div>
 
               <!-- Tech Stack -->
-              <div class="flex flex-wrap gap-2">
+              <ul class="flex flex-wrap gap-2" aria-label="Tech stack">
                 {#each stack as tech}
-                  <span
-                    class="px-3 py-1 text-xs tracking-wide text-neutral-600 dark:text-neutral-500 border border-neutral-300 dark:border-neutral-800 rounded-full"
+                  <li
+                    class="px-3 py-1 text-xs tracking-wide text-neutral-600 dark:text-pencil-dark border border-neutral-300 dark:border-neutral-800 rounded-full"
                   >
                     {tech}
-                  </span>
+                  </li>
                 {/each}
-              </div>
+              </ul>
 
               <a
                 href={repository}
                 target="_blank"
                 rel="noopener noreferrer"
-                class="inline-flex items-center gap-3 text-sm text-neutral-600 hover:text-neutral-900 dark:text-neutral-400 dark:hover:text-white transition-colors duration-300 group/link"
+                class="hit-area inline-flex items-center gap-3 text-sm text-neutral-600 hover:text-neutral-900 dark:text-neutral-400 dark:hover:text-white transition-colors duration-300 group/link"
               >
                 <span
                   class="w-8 h-px bg-neutral-400 dark:bg-neutral-700 group-hover/link:w-12 group-hover/link:bg-neutral-900 dark:group-hover/link:bg-white transition-all duration-300"
                 ></span>
-                View Source Code
+                View Source Code<span class="sr-only"> for {title}</span>
                 <svg
-                  class="w-4 h-4 transform group-hover/link:translate-x-1 transition-transform duration-300"
+                  class="w-4 h-4 transform motion-safe:group-hover/link:translate-x-1 transition-transform duration-300"
                   fill="none"
                   stroke="currentColor"
                   viewBox="0 0 24 24"
+                  aria-hidden="true"
                 >
-                  <!-- <path
+                  <path
                     stroke-linecap="round"
                     stroke-linejoin="round"
                     stroke-width="1.5"
                     d="M17 8l4 4m0 0l-4 4m4-4H3"
-                  /> -->
+                  />
                 </svg>
               </a>
             </div>
