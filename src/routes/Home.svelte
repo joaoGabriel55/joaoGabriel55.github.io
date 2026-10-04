@@ -13,7 +13,7 @@
 </script>
 
 <MainInfo />
+<Talks />
 <Projects />
 <OpenSource />
-<Talks />
 <Blog />

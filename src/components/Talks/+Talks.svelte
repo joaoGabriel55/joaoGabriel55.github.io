@@ -41,7 +41,7 @@
 </script>
 
 {#if active}
-  <section class="py-24 md:py-32 border-t border-neutral-200 dark:border-neutral-900">
+  <section id="talks" class="py-24 md:py-32 border-t border-neutral-200 dark:border-neutral-900">
     <div class="section-container">
       <!-- Section Header -->
       <header class="mb-16 md:mb-20">

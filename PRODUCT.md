@@ -54,10 +54,11 @@ He is also a person, not just a CV. Brazilian Jiu-Jitsu, Football Manager, and d
 
 - **Profile photo:** `src/lib/assets/profile.png`.
 - **Projects** (`src/components/Projects/+Projects.svelte`, previews in `src/lib/assets/projects/`):
+  - MineAtelier, his SaaS for sewing and fashion ateliers (https://mineatelier.com/), built with Rails and Hotwire. The product is in Portuguese, English, and Spanish. Closed source, so it links to the live site.
   - Notificare, a Rails engine on ActiveJob::Continuation, published on RubyGems
   - Poker Estima, a live app on fly.dev
   - The Invoice, a live app on Netlify
-- **Open-source contributions:** rails/rails, axios/axios, grommet/grommet, forem/forem, marcoroth/herb.
+- **Open-source contributions:** 28 merged pull requests, verified on 2026-10-04 and kept in `src/lib/openSource.ts`: rails/rails 4, axios/axios 4, grommet/grommet 5, forem/forem 11, marcoroth/herb 4.
 - **Blog posts** in `src/content/blog/`:
   - LLMs + MCPs for database queries (2026-02)
   - Random Forest vs LLM for house prices (2026-03)

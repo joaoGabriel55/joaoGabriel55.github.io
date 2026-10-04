@@ -1,6 +1,6 @@
 {
   "schemaVersion": 2,
-  "generatedAt": "2026-10-04T13:37:34.033441+00:00",
+  "generatedAt": "2026-10-04T13:48:25.128042+00:00",
   "title": "Design System: Gabriel Quaresma",
   "extensions": {
     "colorMeta": {
@@ -563,7 +563,7 @@
       },
       {
         "name": "The Develop-on-Touch Rule",
-        "body": "Photographs (profile, project previews, repo avatars) rest in grayscale and return to color only on hover. This is the only place color appears.",
+        "body": "Photographs (profile, project previews, repo avatars) rest in grayscale and return to color only on hover. This is the only place color appears. On devices without hover (`@media (hover: none)`), project previews show in full color, so touch visitors never see the work only as faded.",
         "section": "colors"
       },
       {

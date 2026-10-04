@@ -1,3 +1,5 @@
+import rubyconf2026Poster from "./assets/talks/rubyconf-2026.webp";
+
 export interface Talk {
   title: string;
   event: string;
@@ -9,6 +11,9 @@ export interface Talk {
   summary: string;
   // Slug of a blog post that covers the same material.
   relatedPostSlug?: string;
+  // Self-hosted poster frame, used instead of YouTube's default thumbnail
+  // (e.g. when the uploader's title card carries outdated details).
+  poster?: string;
 }
 
 const talks: Talk[] = [
@@ -23,6 +28,8 @@ const talks: Talk[] = [
     summary:
       "A Random Forest trained in Ruby with Rumale goes four rounds against an LLM at estimating house prices: accuracy, latency, consistency, and real-world usability. Actual numbers, not vibes.",
     relatedPostSlug: "random-forest-vs-llm-house-prices",
+    // On-stage frame; the YouTube title card shows a different affiliation than the site.
+    poster: rubyconf2026Poster,
   },
 ];
 
@@ -33,6 +40,7 @@ export function getTalks(): Talk[] {
 }
 
 export function thumbnailUrl(talk: Talk, size: "large" | "small"): string {
+  if (talk.poster) return talk.poster;
   const file = size === "large" ? "maxresdefault" : "hqdefault";
   return `https://i.ytimg.com/vi/${talk.youtubeId}/${file}.jpg`;
 }

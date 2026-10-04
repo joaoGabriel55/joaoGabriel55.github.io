@@ -1,13 +1,36 @@
 <script lang="ts">
+  import mineAtelierPreview from "../../lib/assets/projects/mineatelier.webp";
   import theInvoicePreview from "../../lib/assets/projects/the_invoice.webp";
   import pokerEstimaPreview from "../../lib/assets/projects/poker_estima.webp";
   import notificare from "../../lib/assets/projects/notificare.svg";
 
-  const projects = [
+  interface Project {
+    title: string;
+    // Small label for the kind of project, e.g. "SaaS".
+    kind?: string;
+    description: string;
+    stack: string[];
+    image: string;
+    link: string;
+    // Omitted for closed-source products; the card links to the live site instead.
+    repository?: string;
+  }
+
+  const projects: Project[] = [
+    {
+      title: "MineAtelier",
+      kind: "SaaS",
+      description:
+        "A management system for sewing and fashion ateliers. Measurements, fittings, deposits and balances, production, and delivery dates for every order live in one place, on phone or desktop, in Portuguese, English, and Spanish.",
+      stack: ["Ruby on Rails", "Hotwire"],
+      image: mineAtelierPreview,
+      link: "https://mineatelier.com/",
+    },
     {
       title: "Notificare",
+      kind: "Ruby gem",
       description:
-        "Notificare (Romanian: 'to notify') is a Rails engine built on top of ActiveJob::Continuation. It adds a persisted projection of running-job progress, a durable user-facing notification inbox, and a Hotwire UI scaffold — turning Continuation's resumable steps into a state machine that drives notifications without manual broadcast plumbing.",
+        "A Rails engine built on ActiveJob::Continuation. It tracks the progress of running jobs, keeps a durable notification inbox for users, and ships a Hotwire UI, so resumable job steps drive notifications without manual broadcast code.",
       stack: ["Ruby", "Ruby on Rails"],
       image: notificare,
       link: "https://rubygems.org/gems/notificare",
@@ -16,16 +39,8 @@
     {
       title: "Poker Estima",
       description:
-        "An app that you can estimate with points (emojis) your tasks with your teammates",
-      stack: [
-        "HTML",
-        "CSS",
-        "JavaScript",
-        "Node.js",
-        "WebSockets",
-        "Express",
-        "SQLite",
-      ],
+        "Estimate tasks with your teammates in real time, voting with emoji point cards.",
+      stack: ["Node.js", "Express", "WebSockets", "SQLite"],
       image: pokerEstimaPreview,
       link: "https://poker-estima-app.fly.dev/",
       repository: "https://github.com/joaoGabriel55/NostraEstima",
@@ -33,7 +48,7 @@
     {
       title: "The Invoice",
       description:
-        "Generate professional invoices in minutes. Enter your details, add line items, and export a polished PDF.",
+        "An invoice generator: enter your details and line items, then export a polished PDF.",
       stack: ["HTML", "CSS", "JavaScript"],
       image: theInvoicePreview,
       link: "https://the-invoice.netlify.app/",
@@ -54,7 +69,7 @@
 
     <!-- Projects Grid -->
     <div class="space-y-20">
-      {#each projects as { title, description, stack, image, link, repository }, index}
+      {#each projects as { title, kind, description, stack, image, link, repository }, index (title)}
         <article class="group">
           <div class="grid md:grid-cols-2 gap-8 md:gap-12 items-center">
             <!-- Image -->
@@ -77,10 +92,10 @@
                     alt=""
                     loading="lazy"
                     decoding="async"
-                    class="w-full h-full object-cover grayscale group-hover:grayscale-0 opacity-80 group-hover:opacity-100 scale-100 motion-safe:group-hover:scale-105 transition-all duration-700 ease-out"
+                    class="w-full h-full object-cover grayscale group-hover:grayscale-0 opacity-80 group-hover:opacity-100 [@media(hover:none)]:grayscale-0 [@media(hover:none)]:opacity-100 scale-100 motion-safe:group-hover:scale-105 transition-all duration-700 ease-out"
                   />
                   <div
-                    class="absolute inset-0 bg-gradient-to-t from-white/50 dark:from-surface/50 to-transparent opacity-60 group-hover:opacity-0 transition-opacity duration-500"
+                    class="absolute inset-0 bg-gradient-to-t from-white/50 dark:from-surface/50 to-transparent opacity-60 group-hover:opacity-0 [@media(hover:none)]:opacity-0 transition-opacity duration-500"
                   ></div>
                 </div>
               </a>
@@ -91,11 +106,14 @@
               class="order-2 {index % 2 === 1 ? 'md:order-1' : ''} space-y-6"
             >
               <div class="space-y-4">
+                {#if kind}
+                  <p class="text-xs uppercase text-meta">{kind}</p>
+                {/if}
                 <a
                   href={link}
                   target="_blank"
                   rel="noopener noreferrer"
-                  class="inline-flex items-center gap-3 text-sm text-neutral-600 hover:text-neutral-900 dark:text-neutral-400 dark:hover:text-white hover:underline transition-colors duration-300 group/link"
+                  class="inline-flex items-center gap-3 group/link"
                 >
                   <h3
                     class="heading-secondary group-hover:text-neutral-900 dark:group-hover:text-white transition-colors duration-300"
@@ -120,7 +138,7 @@
               </ul>
 
               <a
-                href={repository}
+                href={repository ?? link}
                 target="_blank"
                 rel="noopener noreferrer"
                 class="hit-area inline-flex items-center gap-3 text-sm text-neutral-600 hover:text-neutral-900 dark:text-neutral-400 dark:hover:text-white transition-colors duration-300 group/link"
@@ -128,7 +146,11 @@
                 <span
                   class="w-8 h-px bg-neutral-400 dark:bg-neutral-700 group-hover/link:w-12 group-hover/link:bg-neutral-900 dark:group-hover/link:bg-white transition-all duration-300"
                 ></span>
-                View Source Code<span class="sr-only"> for {title}</span>
+                {#if repository}
+                  View Source Code<span class="sr-only"> for {title}</span>
+                {:else}
+                  Visit {title}
+                {/if}
                 <svg
                   class="w-4 h-4 transform motion-safe:group-hover/link:translate-x-1 transition-transform duration-300"
                   fill="none"

@@ -29,3 +29,6 @@ dist-ssr
 .claude/skills/impeccable/scripts/bin/
 .impeccable/*.local.json
 .impeccable/hook.cache.json
+
+# Playwright MCP snapshots and console logs
+.playwright-mcp/

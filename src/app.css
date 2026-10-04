@@ -75,6 +75,11 @@
     border-radius: 2px;
   }
 
+  /* In-page jumps land below the fixed header. */
+  [id] {
+    scroll-margin-top: 5rem;
+  }
+
   /* Route headings receive programmatic focus after navigation; no ring. */
   [tabindex="-1"]:focus {
     outline: none;

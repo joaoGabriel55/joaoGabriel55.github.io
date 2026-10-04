@@ -1,23 +1,29 @@
 <script lang="ts">
   import { scrollToTop } from "../../lib/route";
+  import EmailCopy from "../Contact/+EmailCopy.svelte";
+  import SocialLinks from "../Contact/+SocialLinks.svelte";
 
   const currentYear = new Date().getFullYear();
 </script>
 
-<footer class="py-12 md:py-16 border-t border-neutral-200 dark:border-neutral-900">
+<footer class="border-t border-neutral-200 dark:border-neutral-900">
   <div class="section-container">
-    <div class="flex flex-col md:flex-row items-center justify-between gap-6">
-      <!-- Left: Brand -->
-      <div class="text-center md:text-left">
-        <p class="text-sm text-meta font-light">
-          © {currentYear} Gabriel Quaresma
-        </p>
+    <!-- Closing contact: every page ends on a way to reach out. -->
+    <section id="contact" aria-labelledby="contact-heading" class="py-20 md:py-28 space-y-8">
+      <h2 id="contact-heading" class="heading-primary">Open to conversations about work.</h2>
+      <div class="space-y-4">
+        <EmailCopy />
+        <SocialLinks />
       </div>
+    </section>
 
-      <!-- Center: Made with -->
-      <p class="text-xs text-meta">Crafted with care</p>
+    <div
+      class="flex items-center justify-between gap-6 py-8 border-t border-neutral-200 dark:border-neutral-900"
+    >
+      <p class="text-sm text-meta font-light">
+        © {currentYear} Gabriel Quaresma
+      </p>
 
-      <!-- Right: Back to top -->
       <button
         type="button"
         on:click={scrollToTop}

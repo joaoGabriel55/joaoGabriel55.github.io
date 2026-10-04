@@ -175,7 +175,7 @@ Muted "colored pencil" hues, used only for syntax highlighting inside article co
 - **Teal** (`code-symbol` / `code-symbol-dark`): Ruby symbols, variables, interpolation.
 - Comments use Pencil / Pencil Dark in italics; punctuation and plain code use the prose ink.
 
-**The Develop-on-Touch Rule.** Photographs (profile, project previews, repo avatars) rest in grayscale and return to color only on hover. This is the only place color appears.
+**The Develop-on-Touch Rule.** Photographs (profile, project previews, repo avatars) rest in grayscale and return to color only on hover. This is the only place color appears. On devices without hover (`@media (hover: none)`), project previews show in full color, so touch visitors never see the work only as faded.
 
 ## Typography
 
@@ -207,7 +207,7 @@ Weight 500 is used only for `strong`, table headers, and repo names on cards.
 There is a single centered column. Home sections use a `max-w-5xl` container (64rem) with 24px side padding, or 48px from md up. Articles narrow to `max-w-3xl`.
 
 - **Rhythm:** sections are separated by 96px (128px md) of vertical padding plus a full-width top hairline. Section headers sit 64–80px above their content.
-- **Hero:** fills the viewport (`min-h-screen`) with centered content, stacking photo, name, role line, intro, and social links with 48–64px gaps. A 1×64px gradient line pulses below as a scroll hint (desktop only).
+- **Hero:** centered, content-height (not full-viewport), so the first section starts near the bottom of the first screen. It stacks photo (112px, 144px md), name, role line, a credentials row, a short intro, and the contact block, with 32–40px gaps. On phones the role line breaks before "Brazil" and the credentials stack one per line, so separators never dangle.
 - **Projects:** two-column rows from md up, alternating image left and right. They collapse to image-then-text on mobile. Rows are 80px apart.
 - **Grids:** repo cards use 3 columns and blog cards 2 columns from md up, with 24–32px gaps. Both stack to one column below md.
 - **Breakpoints:** essentially one, `md` (768px). `lg` only enlarges the display name and post titles.
@@ -247,8 +247,17 @@ The site's signature interaction, used for "Get in touch", "View Source Code", "
 - **Filled tag** (blog-card tags): Hairline background (`ink` tone in dark mode), Graphite text, 4px radius, 4×8px padding, `#` prefix.
 - Chips are static labels and have no hover state.
 
-### Round Icon Buttons
-Social links (48px) and the theme toggle (36px) are circles with a 1px border and a 60%-opacity icon. On hover the border darkens, the background fills with Bond Lifted / near-Carbon, and the icon reaches full opacity. Icons are 16–20px, stroked at 1.5px.
+### Round Icon Button
+The theme toggle (36px visual, 44px hit area) is a circle with a 1px border. On hover the border darkens and the icon reaches full ink. Icons are 16px, stroked at 1.5px.
+
+### Contact Block (signature)
+Contact is the one action that always stays at full ink weight. It appears in three places: the hero, a header "Contact" link (ink, not Pencil) that jumps to the footer, and a closing footer section ("Open to conversations about work." in Headline). Each block shows the email address as visible text (a mailto link in ink with a hairline underline) next to a small pill "Copy" button. The button confirms with "Copied" and a check, announces through a polite live region, and falls back to selecting the address when the clipboard is blocked. Below sit the Social Links.
+
+### Social Links
+Text links with a 16px single-color glyph (filled with currentColor) and a visible label: LinkedIn, GitHub, Instagram. Graphite at rest, ink on hover. Never brand-colored and never icon-only.
+
+### Credentials Row
+A single line under the hero role line, in Ink-adjacent text at 14px with dot separators. Every item is a verifiable claim that links or jumps to its evidence (the Talks section, the RubyGems page, the Open Source section). Never put an unlinked or unverifiable claim here.
 
 ### Navigation
 The header is fixed, translucent (80% paper with backdrop blur), and has a bottom hairline. The name sits on the left as a home button (light weight, wide tracking, 14–16px). The right side holds a "Blog" text link in Pencil that turns Ink on hover, followed by the theme toggle. The same layout is used on mobile.

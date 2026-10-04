@@ -2,6 +2,7 @@
   import { link, location } from "svelte-spa-router";
   import { theme } from "../../lib/stores/themeStore";
   import { scrollToTop } from "../../lib/route";
+  import { scrollToId } from "../../lib/contact";
 
   // Already on the home page: the link would be a no-op, so return to the top.
   function onHomeClick() {
@@ -34,6 +35,15 @@
         >
           Blog
         </a>
+
+        <!-- Contact stays at full ink weight: it is the action that matters most. -->
+        <button
+          type="button"
+          on:click={() => scrollToId("contact")}
+          class="hit-area text-sm font-light tracking-wide text-neutral-900 dark:text-white border-b border-transparent hover:border-current transition-colors duration-300"
+        >
+          Contact
+        </button>
 
         <!-- Theme Toggle -->
         <button

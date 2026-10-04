@@ -1,16 +1,11 @@
 <script lang="ts" context="module">
+  import { CONTRIBUTIONS } from "../../lib/openSource";
+
   // Repos are listed statically so the section always renders; the GitHub API
   // only adds star counts. Counts are cached across mounts and page reloads
   // to stay well under the unauthenticated rate limit (60 requests/hour/IP).
-  const REPOSITORIES = [
-    "rails/rails",
-    "axios/axios",
-    "grommet/grommet",
-    "forem/forem",
-    "marcoroth/herb",
-  ];
+  const REPOSITORIES = CONTRIBUTIONS.map((c) => c.fullName);
 
-  const GITHUB_USER = "joaoGabriel55";
   const CACHE_KEY = "oss-stars";
   const CACHE_TTL_MS = 60 * 60 * 1000; // 1 hour
 
@@ -72,14 +67,16 @@
 
 <script lang="ts">
   import { onMount } from "svelte";
+  import { mergedPRsUrl } from "../../lib/openSource";
 
-  const repositories = REPOSITORIES.map((fullName) => {
+  const repositories = CONTRIBUTIONS.map(({ fullName, mergedPRs }) => {
     const [owner, name] = fullName.split("/");
     return {
       fullName,
       name,
+      mergedPRs,
       avatar: `https://github.com/${owner}.png?size=80`,
-      contributionsUrl: `https://github.com/${fullName}/pulls?q=is%3Apr+author%3A${GITHUB_USER}+is%3Aclosed`,
+      contributionsUrl: mergedPRsUrl(fullName),
     };
   });
 
@@ -98,7 +95,7 @@
   });
 </script>
 
-<section class="py-24 md:py-32 border-t border-neutral-200 dark:border-neutral-900">
+<section id="open-source" class="py-24 md:py-32 border-t border-neutral-200 dark:border-neutral-900">
   <div class="section-container">
     <!-- Section Header -->
     <header class="mb-16 md:mb-20">
@@ -112,12 +109,12 @@
 
     <!-- Repository Grid -->
     <ul class="grid md:grid-cols-3 gap-6">
-      {#each repositories as { fullName, name, avatar, contributionsUrl } (fullName)}
+      {#each repositories as { fullName, name, mergedPRs, avatar, contributionsUrl } (fullName)}
         <li
           class="group p-6 rounded-lg border border-neutral-200 dark:border-neutral-800 bg-neutral-50 dark:bg-surface-light hover:border-neutral-300 dark:hover:border-neutral-700 hover:bg-neutral-100 dark:hover:bg-surface-lighter transition-all duration-300"
         >
           <!-- Header -->
-          <div class="flex items-center justify-between gap-4 mb-5">
+          <div class="flex items-center justify-between gap-4 mb-4">
             <div class="flex items-center gap-3 min-w-0">
               <img
                 src={avatar}
@@ -135,7 +132,7 @@
               </h3>
             </div>
             {#if stars[fullName] !== undefined}
-              <div class="flex items-center gap-1.5 text-meta shrink-0">
+              <div class="flex items-center gap-1.5 text-meta shrink-0" title="Repository stars">
                 <svg class="w-4 h-4" fill="currentColor" viewBox="0 0 20 20" aria-hidden="true">
                   <path
                     d="M9.049 2.927c.3-.921 1.603-.921 1.902 0l1.07 3.292a1 1 0 00.95.69h3.462c.969 0 1.371 1.24.588 1.81l-2.8 2.034a1 1 0 00-.364 1.118l1.07 3.292c.3.921-.755 1.688-1.54 1.118l-2.8-2.034a1 1 0 00-1.175 0l-2.8 2.034c-.784.57-1.838-.197-1.539-1.118l1.07-3.292a1 1 0 00-.364-1.118L2.98 8.72c-.783-.57-.38-1.81.588-1.81h3.461a1 1 0 00.951-.69l1.07-3.292z"
@@ -143,11 +140,15 @@
                 </svg>
                 <span class="text-sm tabular-nums">
                   {formatStarNumber(stars[fullName])}
-                  <span class="sr-only">stars</span>
+                  <span class="sr-only">repository stars</span>
                 </span>
               </div>
             {/if}
           </div>
+
+          <p class="mb-4 text-sm text-neutral-700 dark:text-neutral-300">
+            {mergedPRs} merged pull requests
+          </p>
 
           <!-- Link -->
           <a
