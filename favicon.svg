@@ -1,4 +1,11 @@
 <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 32 32">
-  <rect width="32" height="32" rx="8" fill="#0a0a0a"/>
-  <path d="M21.99 11.49 A7.5 7.5 0 1 0 23.24 17.94 H16.5" fill="none" stroke="#fafafa" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+  <!-- The header crest: squad number 55 in chalk on a turf magnet. -->
+  <circle cx="16" cy="16" r="16" fill="#0e5a3c"/>
+  <defs>
+    <path id="five" d="M0 0H7V2.6H2.6V5.4H4C5.9 5.4 7 6.6 7 8.6V10.8C7 12.8 5.8 14 3.8 14H3.2C1.2 14 0 12.8 0 10.8V10H2.6V10.6C2.6 11.2 2.9 11.4 3.4 11.4H3.6C4.1 11.4 4.4 11.2 4.4 10.6V8.8C4.4 8.2 4.1 8 3.6 8H0Z"/>
+  </defs>
+  <g fill="#f2f6ef">
+    <use href="#five" x="8.4" y="9"/>
+    <use href="#five" x="16.6" y="9"/>
+  </g>
 </svg>

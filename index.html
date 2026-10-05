@@ -10,8 +10,8 @@
       name="description"
       content="Gabriel Quaresma, software engineer at Codeminer42 in Brazil. Projects, open-source contributions, and writing on React, TypeScript, Node.js, and Ruby on Rails."
     />
-    <meta name="theme-color" content="#ffffff" media="(prefers-color-scheme: light)" />
-    <meta name="theme-color" content="#0a0a0a" media="(prefers-color-scheme: dark)" />
+    <meta name="theme-color" content="#f3f5f1" media="(prefers-color-scheme: light)" />
+    <meta name="theme-color" content="#0b110e" media="(prefers-color-scheme: dark)" />
     <meta property="og:type" content="website" />
     <meta property="og:url" content="https://joaogabriel55.github.io/" />
     <meta property="og:title" content="Gabriel Quaresma · Software Engineer" />
@@ -24,6 +24,7 @@
     <script>
       (function () {
         try {
+          document.documentElement.classList.add("js");
           var stored = localStorage.getItem("theme");
           var prefersLight = window.matchMedia("(prefers-color-scheme: light)").matches;
           var theme = stored === "light" || stored === "dark" ? stored : prefersLight ? "light" : "dark";
@@ -34,8 +35,8 @@
         }
       })();
     </script>
-    <script type="module" crossorigin src="./assets/index-f54653c1.js"></script>
-    <link rel="stylesheet" href="./assets/index-bcb5cbdf.css">
+    <script type="module" crossorigin src="./assets/index-df4faa32.js"></script>
+    <link rel="stylesheet" href="./assets/index-b089b609.css">
   </head>
   <body class="h-screen">
     <div id="app" class="h-full"></div>
