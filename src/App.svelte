@@ -17,7 +17,7 @@
 
 <Header />
 
-<main class="min-h-screen bg-white dark:bg-surface transition-colors duration-300">
+<main class="min-h-screen">
   <Router {routes} />
 </main>
 

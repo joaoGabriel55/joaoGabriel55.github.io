@@ -64,7 +64,9 @@ He is also a person, not just a CV. Brazilian Jiu-Jitsu, Football Manager, and d
   - Random Forest vs LLM for house prices (2026-03)
   - Rumale and Ruby's ML ecosystem (2026-05)
 - **Talks:** RubyConf 2026 (Las Vegas), "Why a 1990s Machine Learning Algorithm Destroys LLMs at Predicting House Prices", 21 minutes, published by Ruby Central on YouTube (`xIDJnAXadmQ`). It is the companion to the Random Forest blog post. The conference day isn't published, so only the year is shown.
-- **Absent:** testimonials, slides for talks, a drawing portfolio, metrics such as stars, downloads, or readership. Future work must not invent any of these.
+- **Experience** (`src/lib/experience.ts`, from LinkedIn on 2026-10-04): Codeminer42 is the current employer (Frontend Developer, since Jan 2021; confirmed by Gabriel on 2026-10-04). Client contracts through Codeminer42: CrewAI (Jun to Sep 2026), GoDaddy (Jul 2022 to Jun 2026), Grano Capital (Mar 2021 to May 2022). Before that, FIWARE volunteer contributor (Jun 2019 to Jan 2021). The site presents them as client contracts via Codeminer42; never call them "loans" (Gabriel's wording, 2026-10-05).
+- **Testimonials** (`src/lib/testimonials.ts`): two LinkedIn recommendations from 2021, both from classmates: Fábio Henrique (in English, verbatim) and Lucas Andrade (in Portuguese, shown in English labelled as a translation, with the original one click away).
+- **Absent:** slides for talks, a drawing portfolio, metrics such as stars, downloads, or readership. Future work must not invent any of these.
 
 ## Product Principles
 

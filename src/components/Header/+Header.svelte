@@ -2,7 +2,21 @@
   import { link, location } from "svelte-spa-router";
   import { theme } from "../../lib/stores/themeStore";
   import { scrollToTop } from "../../lib/route";
-  import { scrollToId } from "../../lib/contact";
+  import { goToSection } from "../../lib/contact";
+
+  const sections = [
+    { id: "experience", label: "Experience" },
+    { id: "projects", label: "Projects" },
+    { id: "talks", label: "Talks" },
+    { id: "open-source", label: "Open source" },
+  ];
+
+  let menuOpen = false;
+
+  function go(id: string) {
+    menuOpen = false;
+    goToSection(id);
+  }
 
   // Already on the home page: the link would be a no-op, so return to the top.
   function onHomeClick() {
@@ -10,84 +24,99 @@
   }
 </script>
 
-<header
-  class="fixed top-0 left-0 right-0 z-50 bg-white/80 dark:bg-surface/80 backdrop-blur-md border-b border-neutral-200 dark:border-neutral-900 transition-colors duration-300"
->
-  <nav class="section-container py-4">
-    <div class="flex items-center justify-between">
-      <!-- Logo / Home Link -->
-      <a
-        href="/"
-        use:link
-        on:click={onHomeClick}
-        class="hit-area text-sm md:text-base font-light tracking-wide text-neutral-700 hover:text-neutral-900 dark:text-neutral-300 dark:hover:text-white transition-colors duration-300"
+<header class="fixed top-0 inset-x-0 z-50 bg-page border-b border-line transition-colors duration-300">
+  <nav class="container-wide h-16 flex items-center justify-between gap-6" aria-label="Main">
+    <a href="/" use:link on:click={onHomeClick} class="group flex items-center gap-3 text-ink">
+      <!-- Squad number badge: 55, from the GitHub handle. -->
+      <span
+        class="kit grid place-items-center w-9 h-9 rounded-full bg-turf text-chalk text-[0.95rem] leading-none motion-safe:group-hover:rotate-[-8deg] transition-transform duration-500 ease-out-expo"
+        aria-hidden="true">55</span
       >
-        Gabriel Quaresma
+      <span class="caps text-[0.9375rem] tracking-[0.04em] text-ink max-sm:sr-only">Gabriel Quaresma</span>
+    </a>
+
+    <div class="flex items-center gap-1 md:gap-2">
+      <ul class="hidden lg:flex items-center">
+        {#each sections as { id, label } (id)}
+          <li>
+            <button
+              type="button"
+              on:click={() => goToSection(id)}
+              class="caps px-3 h-11 text-quiet hover:text-ink transition-colors duration-300"
+            >
+              {label}
+            </button>
+          </li>
+        {/each}
+      </ul>
+      <button
+        type="button"
+        class="lg:hidden caps px-3 h-11 inline-flex items-center gap-1.5 text-ink"
+        aria-expanded={menuOpen}
+        aria-controls="section-menu"
+        on:click={() => (menuOpen = !menuOpen)}
+      >
+        Menu
+        <svg class="w-3.5 h-3.5 transition-transform duration-300 {menuOpen ? 'rotate-180' : ''}" fill="none" stroke="currentColor" viewBox="0 0 24 24" aria-hidden="true">
+          <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 9l6 6 6-6" />
+        </svg>
+      </button>
+      <a
+        href="/blog"
+        use:link
+        aria-current={$location.startsWith("/blog") ? "page" : undefined}
+        class="max-lg:hidden caps px-3 h-11 inline-flex items-center text-quiet hover:text-ink aria-[current=page]:text-ink aria-[current=page]:underline decoration-2 decoration-[var(--turf-ink)] underline-offset-[6px] transition-colors duration-300"
+      >
+        Writing
       </a>
 
-      <!-- Navigation Links -->
-      <div class="flex items-center gap-6 md:gap-8">
-        <a
-          href="/blog"
-          use:link
-          aria-current={$location.startsWith("/blog") ? "page" : undefined}
-          class="hit-area text-sm font-light tracking-wide text-pencil hover:text-neutral-900 dark:text-pencil-dark dark:hover:text-white aria-[current=page]:text-neutral-900 dark:aria-[current=page]:text-white transition-colors duration-300"
-        >
-          Blog
-        </a>
+      <button type="button" on:click={() => goToSection("contact")} class="btn-turf h-9 px-4 ml-1">
+        Contact
+      </button>
 
-        <!-- Contact stays at full ink weight: it is the action that matters most. -->
-        <button
-          type="button"
-          on:click={() => scrollToId("contact")}
-          class="hit-area text-sm font-light tracking-wide text-neutral-900 dark:text-white border-b border-transparent hover:border-current transition-colors duration-300"
-        >
-          Contact
-        </button>
-
-        <!-- Theme Toggle -->
-        <button
-          type="button"
-          on:click={theme.toggle}
-          aria-label={$theme === "dark" ? "Switch to light theme" : "Switch to dark theme"}
-          title={$theme === "dark" ? "Switch to light theme" : "Switch to dark theme"}
-          class="relative before:absolute before:-inset-1 before:content-[''] flex items-center justify-center w-9 h-9 rounded-full border border-neutral-200 dark:border-neutral-800 text-neutral-600 dark:text-neutral-400 hover:text-neutral-900 dark:hover:text-white hover:border-neutral-400 dark:hover:border-neutral-600 transition-all duration-300"
-        >
-          {#if $theme === "dark"}
-            <!-- Sun icon -->
-            <svg
-              class="w-4 h-4"
-              aria-hidden="true"
-              fill="none"
-              stroke="currentColor"
-              viewBox="0 0 24 24"
-            >
-              <path
-                stroke-linecap="round"
-                stroke-linejoin="round"
-                stroke-width="1.5"
-                d="M12 3v1.5M12 19.5V21M5.636 5.636l1.061 1.061M17.303 17.303l1.061 1.061M3 12h1.5M19.5 12H21M5.636 18.364l1.061-1.061M17.303 6.697l1.061-1.061M16 12a4 4 0 11-8 0 4 4 0 018 0z"
-              />
-            </svg>
-          {:else}
-            <!-- Moon icon -->
-            <svg
-              class="w-4 h-4"
-              aria-hidden="true"
-              fill="none"
-              stroke="currentColor"
-              viewBox="0 0 24 24"
-            >
-              <path
-                stroke-linecap="round"
-                stroke-linejoin="round"
-                stroke-width="1.5"
-                d="M21 12.79A9 9 0 1111.21 3 7 7 0 0021 12.79z"
-              />
-            </svg>
-          {/if}
-        </button>
-      </div>
+      <button
+        type="button"
+        on:click={theme.toggle}
+        aria-label={$theme === "dark" ? "Switch to light theme" : "Switch to dark theme"}
+        title={$theme === "dark" ? "Switch to light theme" : "Switch to dark theme"}
+        class="ml-1 grid place-items-center w-11 h-11 rounded-full text-quiet hover:text-ink transition-colors duration-300"
+      >
+        {#if $theme === "dark"}
+          <svg class="w-[18px] h-[18px]" aria-hidden="true" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+            <path
+              stroke-linecap="round"
+              stroke-linejoin="round"
+              stroke-width="1.5"
+              d="M12 3v1.5M12 19.5V21M5.636 5.636l1.061 1.061M17.303 17.303l1.061 1.061M3 12h1.5M19.5 12H21M5.636 18.364l1.061-1.061M17.303 6.697l1.061-1.061M16 12a4 4 0 11-8 0 4 4 0 018 0z"
+            />
+          </svg>
+        {:else}
+          <svg class="w-[18px] h-[18px]" aria-hidden="true" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+            <path
+              stroke-linecap="round"
+              stroke-linejoin="round"
+              stroke-width="1.5"
+              d="M21 12.79A9 9 0 1111.21 3 7 7 0 0021 12.79z"
+            />
+          </svg>
+        {/if}
+      </button>
     </div>
   </nav>
+
+  <!-- Small screens: the sections behind one Menu button, ruled like a team sheet. -->
+  {#if menuOpen}
+    <ul id="section-menu" class="lg:hidden container-wide pb-4 border-t border-line">
+      {#each sections as { id, label } (id)}
+        <li class="border-b border-line">
+          <button type="button" on:click={() => go(id)} class="kit w-full text-left text-3xl text-ink py-3">{label}</button>
+        </li>
+      {/each}
+      <li>
+        <a href="/blog" use:link on:click={() => (menuOpen = false)} class="kit block text-3xl text-ink py-3">Writing</a>
+      </li>
+    </ul>
+  {/if}
 </header>
+
+<svelte:window on:keydown={(e) => e.key === "Escape" && (menuOpen = false)} />

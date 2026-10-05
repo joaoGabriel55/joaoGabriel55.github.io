@@ -1,60 +1,34 @@
 <script lang="ts">
   import { getAllPosts, type BlogPost } from "../../lib/blog";
   import { link } from "svelte-spa-router";
-  import BlogCard from "./+BlogCard.svelte";
+  import PostRow from "./+PostRow.svelte";
+  import SectionHead from "../Section/+SectionHead.svelte";
 
-  // Only the 2 most recent posts
-  const recentPosts: BlogPost[] = getAllPosts().slice(0, 2);
+  const posts: BlogPost[] = getAllPosts();
+  const recentPosts = posts.slice(0, 3);
 </script>
 
-<section class="py-24 md:py-32 border-t border-neutral-200 dark:border-neutral-900" id="blog">
-  <div class="section-container">
-    <!-- Section Header -->
-    <header class="mb-16 md:mb-20">
-      <span class="eyebrow">Thoughts & Ideas</span>
-      <h2 class="heading-primary">Blog</h2>
-      <p class="text-body mt-4 max-w-2xl">
-        Long-form posts on machine learning and LLMs in Ruby and TypeScript,
-        with code you can run.
-      </p>
-    </header>
+<section id="writing" aria-labelledby="writing-heading" class="py-24 md:py-32">
+  <div class="container-wide">
+    <SectionHead id="writing" title="Writing">
+      Long-form posts on machine learning and LLMs in Ruby and TypeScript, with code you can run.
+    </SectionHead>
 
-    <!-- Recent Blog Posts (max 2) -->
     {#if recentPosts.length > 0}
-      <div class="grid md:grid-cols-2 gap-6 md:gap-8">
-        {#each recentPosts as post (post.slug)}
-          <BlogCard {post} />
+      <ul class="-mt-10 md:-mt-14">
+        {#each recentPosts as post, index (post.slug)}
+          <PostRow {post} delay={index * 90} />
         {/each}
-      </div>
+      </ul>
 
-      <!-- View All Posts Link -->
-      <div class="mt-12 text-center">
-        <a
-          href="/blog"
-          use:link
-          class="hit-area inline-flex items-center gap-3 text-sm text-neutral-600 hover:text-neutral-900 dark:text-neutral-400 dark:hover:text-white transition-colors duration-300 group"
-        >
-          View all posts
-          <svg
-            class="w-4 h-4 transform motion-safe:group-hover:translate-x-1 transition-transform duration-300"
-            aria-hidden="true"
-            fill="none"
-            stroke="currentColor"
-            viewBox="0 0 24 24"
-          >
-            <path
-              stroke-linecap="round"
-              stroke-linejoin="round"
-              stroke-width="1.5"
-              d="M17 8l4 4m0 0l-4 4m4-4H3"
-            />
-          </svg>
-        </a>
-      </div>
+      <a href="/blog" use:link class="cta hit-area mt-10">
+        All writing
+        <svg class="run w-4 h-4" aria-hidden="true" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+          <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17 8l4 4m0 0l-4 4m4-4H3" />
+        </svg>
+      </a>
     {:else}
-      <div class="text-center py-16">
-        <p class="text-meta">No blog posts yet. Check back soon!</p>
-      </div>
+      <p class="text-quiet">No posts yet.</p>
     {/if}
   </div>
 </section>

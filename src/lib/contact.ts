@@ -1,3 +1,7 @@
+import { tick } from "svelte";
+import { get } from "svelte/store";
+import { location, push } from "svelte-spa-router";
+
 // Contact details shared by the hero, header, and footer.
 export const EMAIL = "j.quaresmasantos98@gmail.com";
 
@@ -35,4 +39,14 @@ export function scrollToId(id: string): void {
   if (!el) return;
   const reduce = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
   el.scrollIntoView({ behavior: reduce ? "auto" : "smooth", block: "start" });
+}
+
+// Jump to a Home section from any route: go home first when elsewhere.
+export async function goToSection(id: string): Promise<void> {
+  if (get(location) !== "/") {
+    await push("/");
+    await tick();
+    await new Promise((resolve) => requestAnimationFrame(resolve));
+  }
+  scrollToId(id);
 }

@@ -5,6 +5,9 @@
   import Projects from "../components/Projects/+Projects.svelte";
   import Blog from "../components/Blog/+Blog.svelte";
   import Talks from "../components/Talks/+Talks.svelte";
+  import Testimonials from "../components/Testimonials/+Testimonials.svelte";
+  import Experience from "../components/Experience/+Experience.svelte";
+  import Education from "../components/Education/+Education.svelte";
   import { announceRoute } from "../lib/route";
 
   onMount(() => {
@@ -13,7 +16,10 @@
 </script>
 
 <MainInfo />
-<Talks />
+<Experience />
 <Projects />
+<Talks />
 <OpenSource />
+<Testimonials />
 <Blog />
+<Education />

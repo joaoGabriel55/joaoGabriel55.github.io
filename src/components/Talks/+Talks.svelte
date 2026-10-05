@@ -3,6 +3,8 @@
   import { link } from "svelte-spa-router";
   import { getTalks, thumbnailUrl, embedUrl, type Talk } from "../../lib/talks";
   import { prefersReducedMotion } from "../../lib/route";
+  import { reveal } from "../../lib/motion";
+  import SectionHead from "../Section/+SectionHead.svelte";
 
   const talks = getTalks();
 
@@ -41,161 +43,109 @@
 </script>
 
 {#if active}
-  <section id="talks" class="py-24 md:py-32 border-t border-neutral-200 dark:border-neutral-900">
-    <div class="section-container">
-      <!-- Section Header -->
-      <header class="mb-16 md:mb-20">
-        <span class="eyebrow">Speaking</span>
-        <h2 class="heading-primary">Talks</h2>
-        <p class="text-body mt-4 max-w-2xl">
-          Conference talks on the ideas behind the work.
-        </p>
-      </header>
+  <section id="talks" aria-labelledby="talks-heading" class="py-24 md:py-32 bg-raised border-y border-line">
+    <div class="container-wide">
+      <SectionHead id="talks" title="Talks">Conference talks on the ideas behind the work.</SectionHead>
 
-      <!-- Player: a grayscale poster until pressed, then the real embed. -->
-      <div
-        bind:this={player}
-        class="relative aspect-video overflow-hidden rounded-lg border border-neutral-200 dark:border-neutral-800 bg-neutral-100 dark:bg-neutral-900"
-      >
-        {#if playing}
-          {#key active.youtubeId}
-            <iframe
-              src={embedUrl(active)}
-              title="Talk video: {active.title}"
-              class="absolute inset-0 w-full h-full"
-              allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
-              referrerpolicy="strict-origin-when-cross-origin"
-              allowfullscreen
-            ></iframe>
-          {/key}
-        {:else}
-          <button
-            type="button"
-            on:click={play}
-            aria-label="Play: {active.title}"
-            class="group absolute inset-0 w-full h-full"
-          >
-            {#if !thumbnailFailed}
-              <img
-                src={thumbnailUrl(active, "large")}
-                alt=""
-                loading="lazy"
-                decoding="async"
-                width="1280"
-                height="720"
-                on:error={() => (thumbnailFailed = true)}
-                class="w-full h-full object-cover grayscale group-hover:grayscale-0 group-focus-visible:grayscale-0 opacity-80 group-hover:opacity-100 group-focus-visible:opacity-100 motion-safe:group-hover:scale-[1.02] transition-all duration-700 ease-out"
-              />
-              <div
-                class="absolute inset-0 bg-gradient-to-t from-white/40 dark:from-surface/60 to-transparent opacity-70 group-hover:opacity-0 transition-opacity duration-500"
-              ></div>
-            {:else}
+      <div class="grid lg:grid-cols-12 gap-8 lg:gap-12 items-start">
+        <!-- Player: the poster until pressed, then the real embed. -->
+        <div
+          bind:this={player}
+          class="lg:col-span-8 relative aspect-video overflow-hidden rounded-md bg-lifted"
+          use:reveal
+          data-reveal="wipe"
+        >
+          {#if playing}
+            {#key active.youtubeId}
+              <iframe
+                src={embedUrl(active)}
+                title="Talk video: {active.title}"
+                class="absolute inset-0 w-full h-full"
+                allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
+                referrerpolicy="strict-origin-when-cross-origin"
+                allowfullscreen
+              ></iframe>
+            {/key}
+          {:else}
+            <button type="button" on:click={play} aria-label="Play: {active.title}" class="group absolute inset-0 w-full h-full">
+              {#if !thumbnailFailed}
+                <img
+                  src={thumbnailUrl(active, "large")}
+                  alt=""
+                  loading="lazy"
+                  decoding="async"
+                  width="1280"
+                  height="720"
+                  on:error={() => (thumbnailFailed = true)}
+                  class="w-full h-full object-cover motion-safe:group-hover:scale-[1.03] transition-transform duration-1000 ease-out-expo"
+                />
+              {:else}
+                <span class="absolute inset-x-6 top-6 text-left kit text-3xl text-quiet">{active.title}</span>
+              {/if}
+
+              <!-- Play mark: kept in a corner so it never covers the poster's own text. -->
               <span
-                class="absolute inset-x-6 top-6 text-left heading-secondary text-neutral-500"
+                class="absolute left-3 bottom-3 md:left-5 md:bottom-5 flex items-center gap-3 rounded-sm bg-turf text-chalk h-11 md:h-12 pl-1.5 pr-4 md:pr-5 group-hover:bg-turf-deep group-focus-visible:bg-turf-deep transition-colors duration-300"
+                aria-hidden="true"
               >
-                {active.title}
+                <span class="grid place-items-center w-8 h-8 md:w-9 md:h-9 rounded-full bg-chalk text-turf">
+                  <svg class="w-3.5 h-3.5 translate-x-px" viewBox="0 0 24 24" fill="currentColor"><path d="M7 4.5v15l12-7.5z" /></svg>
+                </span>
+                <span class="caps text-sm">Play{active.durationMinutes ? ` · ${active.durationMinutes} min` : ""}</span>
               </span>
-            {/if}
-
-            <!-- Play mark: kept in a corner so it never covers the poster's own text. -->
-            <span
-              class="absolute left-3 bottom-3 md:left-6 md:bottom-6 flex items-center gap-2 md:gap-3 rounded-full bg-neutral-950/70 py-1 pl-1 pr-4 md:py-1.5 md:pl-1.5 md:pr-5 text-white group-hover:bg-neutral-950/85 group-focus-visible:bg-neutral-950/85 transition-colors duration-300"
-              aria-hidden="true"
-            >
-              <span
-                class="flex items-center justify-center w-8 h-8 md:w-10 md:h-10 rounded-full border border-white/60 group-hover:border-white transition-colors duration-300"
-              >
-                <svg class="w-4 h-4 translate-x-px" viewBox="0 0 24 24" fill="none">
-                  <path
-                    d="M7 4.5v15l12-7.5-12-7.5z"
-                    stroke="currentColor"
-                    stroke-width="1.5"
-                    stroke-linejoin="round"
-                  />
-                </svg>
-              </span>
-              <span class="text-xs md:text-sm font-light tracking-wide">
-                Play{active.durationMinutes ? ` · ${active.durationMinutes} min` : ""}
-              </span>
-            </span>
-          </button>
-        {/if}
-      </div>
-
-      <!-- Active talk details -->
-      <div class="mt-8 md:mt-10 max-w-3xl space-y-4">
-        <p class="text-xs uppercase text-meta">{meta(active)}</p>
-        <h3 class="heading-secondary">{active.title}</h3>
-        <p class="text-body max-w-xl">{active.summary}</p>
-
-        <div class="flex flex-wrap gap-x-8 gap-y-2 pt-2">
-          {#if active.relatedPostSlug}
-            <a
-              href="/blog/{active.relatedPostSlug}"
-              use:link
-              class="hit-area inline-flex items-center gap-3 text-sm text-neutral-600 hover:text-neutral-900 dark:text-neutral-400 dark:hover:text-white transition-colors duration-300 group/link"
-            >
-              <span
-                class="w-8 h-px bg-neutral-400 dark:bg-neutral-700 group-hover/link:w-12 group-hover/link:bg-neutral-900 dark:group-hover/link:bg-white transition-all duration-300"
-              ></span>
-              Read the companion post
-            </a>
+            </button>
           {/if}
-          <a
-            href="https://www.youtube.com/watch?v={active.youtubeId}"
-            target="_blank"
-            rel="noopener noreferrer"
-            class="hit-area inline-flex items-center gap-3 text-sm text-neutral-600 hover:text-neutral-900 dark:text-neutral-400 dark:hover:text-white transition-colors duration-300 group/link"
-          >
-            <span
-              class="w-8 h-px bg-neutral-400 dark:bg-neutral-700 group-hover/link:w-12 group-hover/link:bg-neutral-900 dark:group-hover/link:bg-white transition-all duration-300"
-            ></span>
-            Watch on YouTube
-            <svg
-              class="w-4 h-4 transform motion-safe:group-hover/link:translate-x-1 transition-transform duration-300"
-              fill="none"
-              stroke="currentColor"
-              viewBox="0 0 24 24"
-              aria-hidden="true"
+        </div>
+
+        <!-- Active talk details -->
+        <div class="lg:col-span-4 space-y-5" use:reveal={120}>
+          <h3 class="text-2xl md:text-3xl font-bold leading-tight tracking-tight text-ink" style="font-stretch: 85%">
+            {active.title}
+          </h3>
+          <p class="caps text-turf-ink">{meta(active)}</p>
+          <p class="text-text leading-relaxed">{active.summary}</p>
+
+          <div class="flex flex-col items-start gap-4 pt-2">
+            {#if active.relatedPostSlug}
+              <a href="/blog/{active.relatedPostSlug}" use:link class="cta hit-area">
+                Read the companion post
+                <svg class="run w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24" aria-hidden="true">
+                  <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17 8l4 4m0 0l-4 4m4-4H3" />
+                </svg>
+              </a>
+            {/if}
+            <a
+              href="https://www.youtube.com/watch?v={active.youtubeId}"
+              target="_blank"
+              rel="noopener noreferrer"
+              class="cta-quiet hit-area"
             >
-              <path
-                stroke-linecap="round"
-                stroke-linejoin="round"
-                stroke-width="1.5"
-                d="M17 8l4 4m0 0l-4 4m4-4H3"
-              />
-            </svg>
-          </a>
+              Watch on YouTube
+              <svg class="out w-3.5 h-3.5" fill="none" stroke="currentColor" viewBox="0 0 24 24" aria-hidden="true">
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M7 17L17 7M9 7h8v8" />
+              </svg>
+            </a>
+          </div>
         </div>
       </div>
 
       <!-- Other talks: pick one to load it into the player above. -->
       {#if talks.length > 1}
-        <ul class="mt-16 md:mt-20 border-t border-neutral-200 dark:border-neutral-800" aria-label="More talks">
+        <ul class="mt-16 md:mt-20 border-t border-line" aria-label="More talks">
           {#each talks as talk, index (talk.youtubeId)}
-            <li class="border-b border-neutral-200 dark:border-neutral-800">
+            <li class="border-b border-line">
               <button
                 type="button"
                 on:click={() => select(index)}
                 aria-current={index === activeIndex ? "true" : undefined}
                 class="group w-full flex items-center gap-4 md:gap-6 py-5 text-left"
               >
-                <span class="relative shrink-0 w-28 md:w-40 aspect-video overflow-hidden rounded bg-neutral-100 dark:bg-neutral-900">
-                  <img
-                    src={thumbnailUrl(talk, "small")}
-                    alt=""
-                    loading="lazy"
-                    decoding="async"
-                    width="160"
-                    height="90"
-                    class="w-full h-full object-cover grayscale group-hover:grayscale-0 group-aria-[current=true]:grayscale-0 opacity-80 group-hover:opacity-100 transition-all duration-500"
-                  />
+                <span class="relative shrink-0 w-28 md:w-40 aspect-video overflow-hidden rounded-sm bg-lifted">
+                  <img src={thumbnailUrl(talk, "small")} alt="" loading="lazy" decoding="async" width="160" height="90" class="w-full h-full object-cover" />
                 </span>
                 <span class="min-w-0 space-y-1">
-                  <span class="block text-xs uppercase text-meta truncate">{meta(talk)}</span>
-                  <span
-                    class="block text-base md:text-lg font-light tracking-tight text-neutral-700 dark:text-neutral-300 group-hover:text-neutral-900 dark:group-hover:text-white group-aria-[current=true]:text-neutral-900 dark:group-aria-[current=true]:text-white transition-colors duration-300"
-                  >
+                  <span class="block caps text-quiet truncate">{meta(talk)}</span>
+                  <span class="block text-lg font-semibold text-text group-hover:text-ink group-aria-[current=true]:text-ink transition-colors duration-300">
                     {talk.title}
                   </span>
                 </span>

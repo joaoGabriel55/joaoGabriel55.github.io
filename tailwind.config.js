@@ -6,27 +6,39 @@ export default {
     extend: {
       fontFamily: {
         sans: [
+          '"Archivo Variable"',
           "system-ui",
           "-apple-system",
-          "BlinkMacSystemFont",
           '"Segoe UI"',
           "Roboto",
-          '"Helvetica Neue"',
           "Arial",
           "sans-serif",
         ],
+        mono: ["ui-monospace", "SFMono-Regular", "Menlo", "Consolas", "monospace"],
       },
+      // Every color is a paired role variable from app.css, so one utility
+      // serves both themes.
       colors: {
-        surface: {
-          DEFAULT: "#0a0a0a",
-          light: "#141414",
-          lighter: "#1a1a1a",
+        page: "var(--page)",
+        raised: "var(--raised)",
+        lifted: "var(--lifted)",
+        ink: "var(--ink)",
+        text: "var(--text)",
+        quiet: "var(--quiet)",
+        line: "var(--line)",
+        "line-strong": "var(--line-strong)",
+        turf: {
+          DEFAULT: "var(--turf)",
+          deep: "var(--turf-deep)",
+          ink: "var(--turf-ink)",
         },
-        // Meta text (dates, labels, counts): AA on every page and card surface.
-        pencil: {
-          DEFAULT: "#6b6b6b",
-          dark: "#8a8a8a",
+        chalk: {
+          DEFAULT: "var(--chalk)",
+          quiet: "var(--chalk-quiet)",
         },
+      },
+      transitionTimingFunction: {
+        "out-expo": "cubic-bezier(0.16, 1, 0.3, 1)",
       },
       spacing: {
         18: "4.5rem",

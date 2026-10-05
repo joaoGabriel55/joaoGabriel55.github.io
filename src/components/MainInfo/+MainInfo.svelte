@@ -1,94 +1,117 @@
 <script lang="ts">
   import profilePicture from "../../lib/assets/profile.webp";
-  import MyName from "./+MyName.svelte";
+  import TacticsBoard from "./+TacticsBoard.svelte";
+  import Ticker from "./+Ticker.svelte";
   import EmailCopy from "../Contact/+EmailCopy.svelte";
   import SocialLinks from "../Contact/+SocialLinks.svelte";
   import { scrollToId } from "../../lib/contact";
   import { TOTAL_MERGED_PRS } from "../../lib/openSource";
 
   const yearsExperience = new Date().getFullYear() - 2021;
-
-  // Resting hairline underline so the proof reads as clickable without hover.
-  const credentialClass =
-    "hit-area border-b border-neutral-300 dark:border-neutral-700 hover:border-current transition-colors duration-300";
 </script>
 
-<section class="pt-28 pb-20 md:pt-40 md:pb-28">
-  <div class="section-container flex flex-col items-center text-center gap-8 md:gap-10">
-    <!-- Profile Photo with Grayscale Filter -->
-    <div class="relative">
-      <div
-        class="absolute -inset-1 bg-gradient-to-br from-neutral-300 to-neutral-500 dark:from-neutral-700 dark:to-neutral-900 rounded-full blur-sm opacity-50"
-      ></div>
-      <img
-        src={profilePicture}
-        alt="Portrait of Gabriel Quaresma"
-        width="144"
-        height="144"
-        class="relative w-28 h-28 md:w-36 md:h-36 rounded-full object-cover grayscale hover:grayscale-0 transition-all duration-700 ease-out ring-1 ring-neutral-300 dark:ring-neutral-800"
-      />
-    </div>
+<section class="pt-24 md:pt-28">
+  <!-- Three grid pieces: on phones the board sits right under the name, on
+       desktop it spans both text rows on the right. -->
+  <div class="container-wide grid lg:grid-cols-12 lg:grid-rows-[auto_1fr] gap-x-14 pb-14 md:pb-20">
+    <div class="lg:col-span-6 lg:row-start-1">
+      <h1 class="kit text-ink text-[clamp(3.5rem,9vw,6rem)] leading-[0.86]">
+        <span class="mask"><span style="--d:0ms">Gabriel</span></span>
+        <span class="mask"><span style="--d:110ms">Quaresma</span></span>
+      </h1>
 
-    <!-- Name & Title -->
-    <div class="space-y-4">
-      <MyName />
-      <p
-        class="text-neutral-600 dark:text-neutral-400 text-xs sm:text-sm md:text-base font-light tracking-[0.2em] md:tracking-widest uppercase"
-      >
-        <span class="block sm:inline whitespace-nowrap">Software Engineer @Codeminer42</span>
-        <span class="block sm:inline whitespace-nowrap"><span class="hidden sm:inline" aria-hidden="true">· </span>Brazil</span>
+      <p class="mt-5 text-lg md:text-xl font-semibold text-ink intro" style="--d:250ms">
+        Software Engineer <span class="whitespace-nowrap">@Codeminer42 · Brazil</span>
       </p>
     </div>
 
-    <!-- Proof, each item jumps to the evidence -->
-    <ul
-      class="flex flex-col sm:flex-row sm:flex-wrap items-center justify-center gap-x-3 gap-y-2 text-base text-neutral-800 dark:text-neutral-200"
-      aria-label="Highlights"
-    >
-      <li>
-        <button type="button" class={credentialClass} on:click={() => scrollToId("talks")}>
-          RubyConf 2026 speaker
-        </button>
-      </li>
-      <li aria-hidden="true" class="hidden sm:block text-neutral-400 dark:text-neutral-600">·</li>
-      <li>
-        <a
-          href="https://rubygems.org/gems/notificare"
-          target="_blank"
-          rel="noopener noreferrer"
-          class="{credentialClass} inline-flex items-center gap-1"
-        >
-          Notificare on RubyGems
-          <svg class="w-3.5 h-3.5" fill="none" stroke="currentColor" viewBox="0 0 24 24" aria-hidden="true">
-            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M7 17L17 7M9 7h8v8" />
-          </svg>
-          <span class="sr-only">(opens RubyGems in a new tab)</span>
-        </a>
-      </li>
-      <li aria-hidden="true" class="hidden sm:block text-neutral-400 dark:text-neutral-600">·</li>
-      <li>
-        <button type="button" class={credentialClass} on:click={() => scrollToId("open-source")}>
-          {TOTAL_MERGED_PRS} merged PRs in Rails, axios & more
-        </button>
-      </li>
-    </ul>
-
-    <!-- Overview -->
-    <div class="max-w-xl space-y-4">
-      <p class="text-body">
-        Full-stack engineer with {yearsExperience}+ years building web products in
-        React, TypeScript, Node.js, and Ruby on Rails. I care about the experience
-        people have and the code teammates inherit.
-      </p>
-      <p class="text-sm md:text-base font-light text-neutral-600 dark:text-neutral-400">
-        Off the clock: Brazilian Jiu-Jitsu, Football Manager, and drawing.
-      </p>
+    <div class="mt-8 lg:mt-0 lg:col-span-6 lg:col-start-7 lg:row-start-1 lg:row-span-2 lg:self-center intro" style="--d:150ms">
+      <TacticsBoard />
     </div>
 
-    <!-- Contact -->
-    <div class="flex flex-col items-center gap-4">
-      <EmailCopy align="center" />
-      <SocialLinks align="center" />
+    <div class="mt-10 lg:mt-0 lg:col-span-6 lg:row-start-2">
+
+      <div class="lg:mt-6 flex items-start gap-4 max-w-xl intro" style="--d:330ms">
+        <img
+          src={profilePicture}
+          alt="Portrait of Gabriel Quaresma"
+          width="64"
+          height="64"
+          class="shrink-0 w-16 h-16 rounded-full object-cover ring-2 ring-turf"
+        />
+        <div class="space-y-2">
+          <p class="lede">
+            Full-stack engineer with {yearsExperience}+ years building web products in React,
+            TypeScript, Node.js, and Ruby on Rails. I care about the experience people have and the
+            code teammates inherit.
+          </p>
+          <p class="text-quiet">Off the clock: Brazilian Jiu-Jitsu, Football Manager, and drawing.</p>
+        </div>
+      </div>
+
+      <ul class="mt-7 flex flex-wrap gap-x-6 gap-y-3 intro" style="--d:410ms" aria-label="Highlights">
+        <li>
+          <button type="button" class="cta hit-area" on:click={() => scrollToId("talks")}>
+            RubyConf 2026 speaker
+          </button>
+        </li>
+        <li>
+          <a href="https://rubygems.org/gems/notificare" target="_blank" rel="noopener noreferrer" class="cta hit-area">
+            Notificare on RubyGems
+            <svg class="out w-3.5 h-3.5" fill="none" stroke="currentColor" viewBox="0 0 24 24" aria-hidden="true">
+              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M7 17L17 7M9 7h8v8" />
+            </svg>
+            <span class="sr-only">(opens RubyGems in a new tab)</span>
+          </a>
+        </li>
+        <li>
+          <button type="button" class="cta hit-area" on:click={() => scrollToId("open-source")}>
+            {TOTAL_MERGED_PRS} merged PRs in Rails, axios & more
+          </button>
+        </li>
+      </ul>
+
+      <div class="mt-9 pt-6 border-t border-line space-y-3 intro" style="--d:490ms">
+        <EmailCopy />
+        <SocialLinks />
+      </div>
     </div>
   </div>
+
+  <Ticker />
 </section>
+
+<style>
+  .mask {
+    display: block;
+    overflow: hidden;
+    padding-bottom: 0.04em;
+  }
+
+  .mask > span {
+    display: block;
+  }
+
+  @media (prefers-reduced-motion: no-preference) {
+    .mask > span {
+      animation: rise 1s cubic-bezier(0.16, 1, 0.3, 1) var(--d) both;
+    }
+
+    .intro {
+      animation: enter 0.9s cubic-bezier(0.16, 1, 0.3, 1) var(--d) both;
+    }
+  }
+
+  @keyframes rise {
+    from {
+      transform: translateY(105%);
+    }
+  }
+
+  @keyframes enter {
+    from {
+      opacity: 0;
+      transform: translateY(16px);
+    }
+  }
+</style>
