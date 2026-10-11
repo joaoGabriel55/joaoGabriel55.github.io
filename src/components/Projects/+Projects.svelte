@@ -57,12 +57,13 @@
     {
       title: "Poker Estima",
       kind: "Live app",
-      description: "Estimate tasks with your teammates in real time, voting with emoji point cards.",
-      stack: ["Node.js", "Express", "WebSockets", "SQLite"],
+      description:
+        "Free planning poker for teams on a call. Share one link, everyone votes in secret, the facilitator reveals the average and the split, and the room closes itself. No sign-up, nothing to install.",
+      stack: ["Node.js", "Express", "Socket.IO"],
       image: pokerEstimaPreview,
       link: "https://poker-estima-app.fly.dev/",
       linkLabel: "Try the live app",
-      repository: "https://github.com/joaoGabriel55/NostraEstima",
+      repository: "https://github.com/joaoGabriel55/PokerEstima",
     },
     {
       title: "The Invoice",
