@@ -2,6 +2,7 @@
   import mineAtelierPreview from "../../lib/assets/projects/mineatelier.webp";
   import theInvoicePreview from "../../lib/assets/projects/the_invoice.webp";
   import pokerEstimaPreview from "../../lib/assets/projects/poker_estima.webp";
+  import savoiaStudioPreview from "../../lib/assets/projects/savoia_studio.webp";
   import notificare from "../../lib/assets/projects/notificare.svg";
   import SectionHead from "../Section/+SectionHead.svelte";
   import { reveal } from "../../lib/motion";
@@ -30,6 +31,17 @@
       image: mineAtelierPreview,
       link: "https://mineatelier.com/",
       linkLabel: "Visit MineAtelier",
+    },
+    {
+      title: "Savoia Studio",
+      kind: "Desktop app",
+      description:
+        "A free, open-source desktop client for PostgreSQL and MySQL that starts fast and stays light on memory. Schema explorer, a SQL console with schema-aware completion, and a data grid where you review pending edits before committing.",
+      stack: ["Rust", "GPU rendering"],
+      image: savoiaStudioPreview,
+      link: "https://joaogabriel55.github.io/savoia-studio/",
+      linkLabel: "Visit Savoia Studio",
+      repository: "https://github.com/joaoGabriel55/savoia-studio",
     },
     {
       title: "Notificare",
@@ -106,7 +118,7 @@
       </div>
     </article>
 
-    <div class="mt-20 md:mt-24 grid md:grid-cols-3 gap-12 md:gap-8">
+    <div class="mt-20 md:mt-24 grid md:grid-cols-2 gap-12 md:gap-x-10 md:gap-y-16">
       {#each rest as { title, kind, description, stack, image, link, linkLabel, repository }, index (title)}
         <article class="group flex flex-col" use:reveal={index * 110}>
           <a

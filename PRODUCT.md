@@ -55,6 +55,7 @@ He is also a person, not just a CV. Brazilian Jiu-Jitsu, Football Manager, and d
 - **Profile photo:** `src/lib/assets/profile.png`.
 - **Projects** (`src/components/Projects/+Projects.svelte`, previews in `src/lib/assets/projects/`):
   - MineAtelier, his SaaS for sewing and fashion ateliers (https://mineatelier.com/), built with Rails and Hotwire. The product is in Portuguese, English, and Spanish. Closed source, so it links to the live site.
+  - Savoia Studio, an open-source Rust desktop client for PostgreSQL and MySQL (https://joaogabriel55.github.io/savoia-studio/, repo github.com/joaoGabriel55/savoia-studio)
   - Notificare, a Rails engine on ActiveJob::Continuation, published on RubyGems
   - Poker Estima, a live app on fly.dev
   - The Invoice, a live app on Netlify
