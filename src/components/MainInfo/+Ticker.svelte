@@ -5,6 +5,7 @@
   const items = [
     "Speaker · RubyConf 2026",
     "Notificare on RubyGems",
+    "why-classes · 3.7k downloads",
     `${TOTAL_MERGED_PRS} merged pull requests`,
     ...CONTRIBUTIONS.map((c) => c.fullName),
     "MineAtelier · live SaaS",

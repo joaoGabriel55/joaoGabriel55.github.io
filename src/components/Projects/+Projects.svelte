@@ -4,6 +4,7 @@
   import pokerEstimaPreview from "../../lib/assets/projects/poker_estima.webp";
   import savoiaStudioPreview from "../../lib/assets/projects/savoia_studio.webp";
   import notificare from "../../lib/assets/projects/notificare.svg";
+  import whyClassesPreview from "../../lib/assets/projects/why_classes.webp";
   import SectionHead from "../Section/+SectionHead.svelte";
   import { reveal } from "../../lib/motion";
 
@@ -53,6 +54,17 @@
       link: "https://rubygems.org/gems/notificare",
       linkLabel: "View on RubyGems",
       repository: "https://github.com/joaoGabriel55/notificare",
+    },
+    {
+      title: "why-classes",
+      kind: "Ruby gem",
+      description:
+        "A linter and refactoring tool, inspired by Dave Thomas's talk on the over-use of classes in Ruby. It finds class smells in a Ruby or Rails codebase, suggests a module, Struct, or Data instead, and rewrites the safe cases with --fix. Over 3,700 downloads.",
+      stack: ["Ruby", "Prism"],
+      image: whyClassesPreview,
+      link: "https://rubygems.org/gems/why-classes",
+      linkLabel: "View on RubyGems",
+      repository: "https://github.com/joaoGabriel55/why-classes",
     },
     {
       title: "Poker Estima",
@@ -119,7 +131,7 @@
       </div>
     </article>
 
-    <div class="mt-20 md:mt-24 grid md:grid-cols-2 gap-12 md:gap-x-10 md:gap-y-16">
+    <div class="mt-20 md:mt-24 grid md:grid-cols-2 lg:grid-cols-3 gap-12 md:gap-x-10 md:gap-y-16">
       {#each rest as { title, kind, description, stack, image, link, linkLabel, repository }, index (title)}
         <article class="group flex flex-col" use:reveal={index * 110}>
           <a

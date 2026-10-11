@@ -57,6 +57,7 @@ He is also a person, not just a CV. Brazilian Jiu-Jitsu, Football Manager, and d
   - MineAtelier, his SaaS for sewing and fashion ateliers (https://mineatelier.com/), built with Rails and Hotwire. The product is in Portuguese, English, and Spanish. Closed source, so it links to the live site.
   - Savoia Studio, an open-source Rust desktop client for PostgreSQL and MySQL (https://joaogabriel55.github.io/savoia-studio/, repo github.com/joaoGabriel55/savoia-studio)
   - Notificare, a Rails engine on ActiveJob::Continuation, published on RubyGems
+  - why-classes, a Ruby linter/refactoring tool for class over-use, on RubyGems (3,724 downloads, verified 2026-10-10)
   - Poker Estima, a live app on fly.dev
   - The Invoice, a live app on Netlify
 - **Open-source contributions:** 28 merged pull requests, verified on 2026-10-04 and kept in `src/lib/openSource.ts`: rails/rails 4, axios/axios 4, grommet/grommet 5, forem/forem 11, marcoroth/herb 4.
